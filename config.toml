@@ -1,0 +1,8 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'mlzhang-wiki'
+
+
+[module]
+[[module.imports]]
+path = 'github.com/alex-shpak/hugo-book'
