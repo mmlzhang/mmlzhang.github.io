@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on mlzhang-wiki</title>
+    <link>http://example.org/docs/</link>
+    <description>Recent content in Docs on mlzhang-wiki</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://example.org/docs/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/docs/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>安装hugo #  brew install hugo 创建项目 #  hugo new site mlzhang_wiki  cd mlzhang_wiki git init  # 安装主题 git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book  hugo mod init github.com/repo/path   # config.toml 添加 [module] [[module.imports]] path = &amp;#39;github.com/alex-shpak/hugo-book&amp;#39;   # 拷贝示例 cp -R themes/hugo-book/exampleSite/content . 启动本地服务 #  hugo server -D </description>
+    </item>
+    
+  </channel>
+</rss>
