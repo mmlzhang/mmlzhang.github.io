@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 1000
 bookFlatSection: true
 title: "Example Site"
 ---
