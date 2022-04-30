@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>01-Hugo搭建博客 on wiki-mlzhang</title><link>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link><description>Recent content in 01-Hugo搭建博客 on wiki-mlzhang</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid><description>安装hugo # brew install hugo 创建项目 # hugo new site mlzhang_wiki cd mlzhang_wiki git init # 安装主题 git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book hugo mod init github.com/repo/path # config.toml 添加 [module] [[module.imports]] path = &amp;#39;github.com/alex-shpak/hugo-book&amp;#39; # 拷贝示例 cp -R themes/hugo-book/exampleSite/content . 启动本地服务 # hugo server -D</description></item><item><title/><link>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/github%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/github%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1/</guid><description>托管到Github Pages # 参考文档：
+https://zhuanlan.zhihu.com/p/350977057 对于托管到Github Pages，官方文档写的不是那么特别清楚，实际上是非常简单的。
+因为是博客，所以遵循Github Pages的规则，项目名称就是username.github.io，建一个这样名字的库，权限设置为public，默认选项一个都不要勾选，建完了以后，就会看到这样一个界面。
+我们前文已经初始化过git库了，所以这里我们只要把远程库的地址加进来就好了。
+在这之前，先随便创建一个README.md文件，一会儿用得到它。
+studyhugo $ echo &amp;#34;# Blog Contructing......&amp;#34; &amp;gt;&amp;gt; README.md 然后创建master分支
+studyhugo $ git add . studyhugo $ git branch -M master studyhugo $ git commit -m &amp;#34;Initial Commit&amp;#34; studyhugo $ git remote add origin git@github.com:username/username.github.io.git 然后push上去。
+studyhugo $ git push 到Github上看到我们Hugo站点源文件已经push上来了。
+对于username.github.io这样的项目名，Github会直接认定为Github Pages并发布。所以现在已经可以访问https://username.github.io。
+当然，因为Github Pages并不直接支持Hugo站点的发布，所以它发布了我们添加进去的README.md文件。
+接下来我们就要添加Github Action，Hugo官方已经给我们准备好了，我们自己要做的事很少，参考官方文档的这一节。
+官方提供了一个yml文件，文件应该存在.github/workflows/gh-pages.yml里。
+在项目的选项里选择Actions——
+点进去以后是这样子的——
+把这里的文件名改成gh-pages.yml，删掉当前的内容，然后把官方提供的代码拷贝进来，注意这里官方的代码部署用的分支是main，而我们的是master，要对应的改掉。
+name: github pages on: push: branches: - master # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.</description></item><item><title/><link>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/</guid><description>使用自定义域名来访问GitHub上部署的hugo博客——GitHub Pages # 参考链接
+https://cloud.tencent.com/developer/article/1834163 hugo博客搭建好了，但访问的时候只能是以固定的域名形式（用户名.github.io）进行访问。这时可以通过购买域名的方式行实现自定义域名访问。可以去国外买或者国内，国内都是需要备案的。
+https://sg.godaddy.com/zh例如这个就是国外购买域名的网站，直接购买即可。如果是国内的话需要购买域名和服务器或主机才能备案。
+购买域名后：
+第一步 # 首先是用ping命令找到存放你的github pages的主机的IP地址，在终端里面用命令ping xxx.github.io便可完成，下图中红框内的就是我们要找的IP地址：
+第二步 # 在购买域名的提供商为域名添加解析。我是在阿里云买的域名，因此我以阿里云的为例。在域名控制台选择想要绑定的域名，并点击解析：
+然后添加如下两条记录：
+记录类型：CNAME 将一个域名指向例外一个域名，再由另一个域名提供 IP 地址，就需要添加 CNAME 记录。 主机记录：www 表示访问域名的时候以www开头为一级域名。如果是二级域名的话就在前面加上自己想要的参数，访问的时候也是以二级域名的形式访问。 记录类型：A 将域名指向一个IPv4地址，如果需要将域名指向一个 IP 地址（外网地址），就需要添加 A 记录。 主机记录：@ 表示访问的时候直接用 yunxdr.top 形式 访问，前面不加任何参数。如果是www，就要以 www.yunxdr.top 访问。这里设置的@形式与下面GitHub上自定义的域名要对应 第三步 # 在上面存放静态网站的Repository Settings里面GitHubPages Custom domain（自定义域名）填上自己的域名点击save； 设置完成后就可以通过 yunxdr.top 访问部署在GitHub上的hugo的网站了
+例外如果不太懂解析域名的可以参考如下资料：
+关于记录值www和@的区别
+创建 www.dns-example.com 的子域名。 创建 dns-example.</description></item><item><title/><link>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hidden/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hidden/</guid><description>This page is hidden in menu # Quondam non pater est dignior ille Eurotas # Latent te facies # Lorem markdownum arma ignoscas vocavit quoque ille texit mandata mentis ultimus, frementes, qui in vel. Hippotades Peleus pennas conscia cuiquam Caeneus quas.
+Pater demittere evincitque reddunt Maxime adhuc pressit huc Danaas quid freta Soror ego Luctus linguam saxa ultroque prior Tatiumque inquit Saepe liquitur subita superata dederat Anius sudor Cum honorum Latona # O fallor in sustinui iussorum equidem.</description></item></channel></rss>

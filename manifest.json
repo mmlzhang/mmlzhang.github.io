@@ -1,6 +1,6 @@
 {
-  "name": "mlzhang-wiki",
-  "short_name": "mlzhang-wiki",
+  "name": "wiki-mlzhang",
+  "short_name": "wiki-mlzhang",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

@@ -1,0 +1,123 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="托管到Github Pages #  参考文档：
+ https://zhuanlan.zhihu.com/p/350977057  对于托管到Github Pages，官方文档写的不是那么特别清楚，实际上是非常简单的。
+因为是博客，所以遵循Github Pages的规则，项目名称就是username.github.io，建一个这样名字的库，权限设置为public，默认选项一个都不要勾选，建完了以后，就会看到这样一个界面。
+我们前文已经初始化过git库了，所以这里我们只要把远程库的地址加进来就好了。
+在这之前，先随便创建一个README.md文件，一会儿用得到它。
+studyhugo $ echo &#34;# Blog Contructing......&#34; >> README.md 然后创建master分支
+studyhugo $ git add . studyhugo $ git branch -M master studyhugo $ git commit -m &#34;Initial Commit&#34; studyhugo $ git remote add origin git@github.com:username/username.github.io.git 然后push上去。
+studyhugo $ git push 到Github上看到我们Hugo站点源文件已经push上来了。
+对于username.github.io这样的项目名，Github会直接认定为Github Pages并发布。所以现在已经可以访问https://username.github.io。
+当然，因为Github Pages并不直接支持Hugo站点的发布，所以它发布了我们添加进去的README.md文件。
+接下来我们就要添加Github Action，Hugo官方已经给我们准备好了，我们自己要做的事很少，参考官方文档的这一节。
+官方提供了一个yml文件，文件应该存在.github/workflows/gh-pages.yml里。
+在项目的选项里选择Actions——
+点进去以后是这样子的——
+把这里的文件名改成gh-pages.yml，删掉当前的内容，然后把官方提供的代码拷贝进来，注意这里官方的代码部署用的分支是main，而我们的是master，要对应的改掉。
+name: github pages  on:  push:  branches:  - master  # Set a branch to deploy  jobs:  deploy:  runs-on: ubuntu-18."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content="托管到Github Pages #  参考文档：
+ https://zhuanlan.zhihu.com/p/350977057  对于托管到Github Pages，官方文档写的不是那么特别清楚，实际上是非常简单的。
+因为是博客，所以遵循Github Pages的规则，项目名称就是username.github.io，建一个这样名字的库，权限设置为public，默认选项一个都不要勾选，建完了以后，就会看到这样一个界面。
+我们前文已经初始化过git库了，所以这里我们只要把远程库的地址加进来就好了。
+在这之前，先随便创建一个README.md文件，一会儿用得到它。
+studyhugo $ echo &#34;# Blog Contructing......&#34; >> README.md 然后创建master分支
+studyhugo $ git add . studyhugo $ git branch -M master studyhugo $ git commit -m &#34;Initial Commit&#34; studyhugo $ git remote add origin git@github.com:username/username.github.io.git 然后push上去。
+studyhugo $ git push 到Github上看到我们Hugo站点源文件已经push上来了。
+对于username.github.io这样的项目名，Github会直接认定为Github Pages并发布。所以现在已经可以访问https://username.github.io。
+当然，因为Github Pages并不直接支持Hugo站点的发布，所以它发布了我们添加进去的README.md文件。
+接下来我们就要添加Github Action，Hugo官方已经给我们准备好了，我们自己要做的事很少，参考官方文档的这一节。
+官方提供了一个yml文件，文件应该存在.github/workflows/gh-pages.yml里。
+在项目的选项里选择Actions——
+点进去以后是这样子的——
+把这里的文件名改成gh-pages.yml，删掉当前的内容，然后把官方提供的代码拷贝进来，注意这里官方的代码部署用的分支是main，而我们的是master，要对应的改掉。
+name: github pages  on:  push:  branches:  - master  # Set a branch to deploy  jobs:  deploy:  runs-on: ubuntu-18."><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/github%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1/"><meta property="article:section" content="docs"><title>Github静态页面托管 | wiki-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.be5f49ce86aec1258a2dc5f8eb6c3dd468d1ae3795fc6710db55655d906a6134.js integrity="sha256-vl9JzoauwSWKLcX462w91GjRrjeV/GcQ21VlXZBqYTQ=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>wiki-mlzhang</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><input type=checkbox id=section-bedf8681ad0a48b597e0543c210679d7 class=toggle checked>
+<label for=section-bedf8681ad0a48b597e0543c210679d7 class="flex justify-between"><a role=button>01-Hugo搭建博客</a></label><ul><li><a href=/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/>Hugo搭建博客</a></li><li><a href=/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/github%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1/ class=active>Github静态页面托管</a></li><li><a href=/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/>添加阿里云域名解析</a></li></ul></li><li class=book-section-flat><a href=/docs/example/>Example Site</a><ul><li><input type=checkbox id=section-4e46b01272d410b3a99461d79326ddf4 class=toggle>
+<label for=section-4e46b01272d410b3a99461d79326ddf4 class="flex justify-between"><a role=button>Collapsed</a></label><ul><li><a href=/docs/example/collapsed/3rd-level/>3rd Level</a><ul><li><a href=/docs/example/collapsed/3rd-level/4th-level/>4th Level</a></li></ul></li></ul></li><li><a href=/docs/example/table-of-contents/>Table of Contents</a><ul><li><a href=/docs/example/table-of-contents/with-toc/>With ToC</a></li><li><a href=/docs/example/table-of-contents/without-toc/>Without ToC</a></li></ul></li></ul></li><li class=book-section-flat><span>Shortcodes</span><ul><li><a href=/docs/shortcodes/buttons/>Buttons</a></li><li><a href=/docs/shortcodes/columns/>Columns</a></li><li><a href=/docs/shortcodes/details/>Details</a></li><li><a href=/docs/shortcodes/expand/>Expand</a></li><li><a href=/docs/shortcodes/hints/>Hints</a></li><li><a href=/docs/shortcodes/katex/>Katex</a></li><li><a href=/docs/shortcodes/mermaid/>Mermaid</a></li><li><input type=checkbox id=section-d3fc1bf6d66cd84b896a0af9f40cb1d5 class=toggle>
+<label for=section-d3fc1bf6d66cd84b896a0af9f40cb1d5 class="flex justify-between"><a href=/docs/shortcodes/section/>Section</a></label><ul><li><a href=/docs/shortcodes/section/first-page/>First Page</a></li><li><a href=/docs/shortcodes/section/second-page/>Second Page</a></li></ul></li><li><a href=/docs/shortcodes/tabs/>Tabs</a></li></ul></li></ul><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>Github静态页面托管</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#托管到github-pages>托管到Github Pages</a></li></ul></nav></aside></header><article class=markdown><h2 id=托管到github-pages>托管到Github Pages
+<a class=anchor href=#%e6%89%98%e7%ae%a1%e5%88%b0github-pages>#</a></h2><p>参考文档：</p><ul><li><a href=https://zhuanlan.zhihu.com/p/350977057>https://zhuanlan.zhihu.com/p/350977057</a></li></ul><p>对于托管到Github Pages，官方<a href="https://link.zhihu.com/?target=https%3A//gohugo.io/hosting-and-deployment/hosting-on-github">文档</a>写的不是那么特别清楚，实际上是非常简单的。</p><p>因为是博客，所以遵循Github Pages的规则，项目名称就是<code>username.github.io</code>，建一个这样名字的库，权限设置为<code>public</code>，默认选项一个都不要勾选，建完了以后，就会看到这样一个界面。</p><p><img src=https://pic4.zhimg.com/80/v2-0c1afe34739044fd1b94f16cbbcec83f_1440w.jpg alt=img></p><p>我们前文已经初始化过<code>git</code>库了，所以这里我们只要把远程库的地址加进来就好了。</p><p>在这之前，先随便创建一个<code>README.md</code>文件，一会儿用得到它。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>studyhugo $ echo &#34;# Blog Contructing......&#34; &gt;&gt; README.md
+</span></span></code></pre></div><p>然后创建<code>master</code>分支</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>studyhugo $ git add .
+</span></span><span style=display:flex><span>studyhugo $ git branch -M master
+</span></span><span style=display:flex><span>studyhugo $ git commit -m &#34;Initial Commit&#34;
+</span></span><span style=display:flex><span>studyhugo $ git remote add origin git@github.com:username/username.github.io.git
+</span></span></code></pre></div><p>然后<code>push</code>上去。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>studyhugo $ git push
+</span></span></code></pre></div><p>到Github上看到我们Hugo站点源文件已经<code>push</code>上来了。</p><p><img src=https://pic4.zhimg.com/80/v2-3b6b8d0291ba5cd0e04aa32cd51e02bf_1440w.jpg alt=img></p><p>对于<code>username.github.io</code>这样的项目名，Github会直接认定为Github Pages并发布。所以现在已经可以访问<code>https://username.github.io</code>。</p><p><img src=https://pic1.zhimg.com/80/v2-d8e0b8c45e4f34843b32e03b1d59d914_1440w.jpg alt=img></p><p>当然，因为Github Pages并不直接支持Hugo站点的发布，所以它发布了我们添加进去的README.md文件。</p><p>接下来我们就要添加Github Action，Hugo官方已经给我们准备好了，我们自己要做的事很少，参考官方文档的<a href="https://link.zhihu.com/?target=https%3A//gohugo.io/hosting-and-deployment/hosting-on-github/%23build-hugo-with-github-action">这一节</a>。</p><p>官方提供了一个<code>yml</code>文件，文件应该存在<code>.github/workflows/gh-pages.yml</code>里。</p><p>在项目的选项里选择Actions——</p><p><img src=https://pic1.zhimg.com/80/v2-e9b63c17081bb06e98e791d030ba1aa4_1440w.jpg alt=img></p><p>点进去以后是这样子的——</p><p><img src=https://pic1.zhimg.com/80/v2-03c0a4a827cf18721caa0d6a5c92c1c4_1440w.jpg alt=img></p><p>把这里的文件名改成<code>gh-pages.yml</code>，删掉当前的内容，然后把官方提供的代码拷贝进来，注意这里官方的代码部署用的分支是<code>main</code>，而我们的是<code>master</code>，要对应的改掉。</p><p><img src=https://pic1.zhimg.com/80/v2-32360ca179a2fc32dd77317c8612b444_1440w.jpg alt=img></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>github pages</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>push</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>master </span> <span style=color:#75715e># Set a branch to deploy</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>deploy</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-18.04</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v2</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>submodules</span>: <span style=color:#66d9ef>true</span>  <span style=color:#75715e># Fetch Hugo themes (true OR recursive)</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>fetch-depth</span>: <span style=color:#ae81ff>0</span>    <span style=color:#75715e># Fetch all history for .GitInfo and .Lastmod</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Setup Hugo</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>peaceiris/actions-hugo@v2</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>hugo-version</span>: <span style=color:#e6db74>&#39;latest&#39;</span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e># extended: true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>hugo --minify</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Deploy</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>peaceiris/actions-gh-pages@v3</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>github_token</span>: <span style=color:#ae81ff>${{ secrets.GITHUB_TOKEN }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>publish_dir</span>: <span style=color:#ae81ff>./public</span>
+</span></span></code></pre></div><p>然后Commit。</p><p><img src=https://pic1.zhimg.com/80/v2-4c5a27fea570f5756bca826491392114_1440w.jpg alt=img></p><p>再次回到Actions界面，由于Commit了一个新文件，所以会立刻触发一次构建发布的任务。</p><p><img src=https://pic4.zhimg.com/80/v2-9eb18238050fd6b700ae60f950dd7907_1440w.jpg alt=img></p><p>如上所示，所有任务完成，回到Code选项里，现在会在分支中看到一个<code>gh-pages</code>的分支。</p><p><img src=https://pic3.zhimg.com/80/v2-0e9d310c2e34e2683b5820dbc139d242_1440w.jpg alt=img></p><p>在<code>master</code>分支里是看不到<code>/public</code>目录的，也看不到任何发布后的文件，但是切到<code>gh-pages</code>分支，就会看到发布后的文件——</p><p><img src=https://pic1.zhimg.com/80/v2-f455cdcc0c9a97bb74bf4dc22a405c64_1440w.jpg alt=img></p><p>接下来还需要到Setting选项里设置Github Pages设置发布源为<code>gh-pages</code>。</p><p><img src=https://pic3.zhimg.com/80/v2-807ea8e235bde861715afacdc78e827e_1440w.jpg alt=img></p><p>等一小会儿，再次访问 <code>https://username.github.io</code></p><p><img src=https://pic2.zhimg.com/80/v2-cc39de0c9298ae589a27d1763d9bffc5_1440w.jpg alt=img></p><p>Yeah～</p><p>等等，为什么没有任何post？</p><p>因为我们的第一篇<code>post</code>的<code>draft</code>属性是<code>true</code>，而发布的配置里并没有带上<code>-D</code>这样的参数去执行。</p><p>因为<code>github</code>上已经发生了变化，所以先用<code>git pull</code>命令把远端的库拉下来。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>$ git pull
+</span></span><span style=display:flex><span>remote: Enumerating objects: 24, done.
+</span></span><span style=display:flex><span>remote: Counting objects: 100% (24/24), done.
+</span></span><span style=display:flex><span>remote: Compressing objects: 100% (14/14), done.
+</span></span><span style=display:flex><span>remote: Total 23 (delta 6), reused 18 (delta 5), pack-reused 0
+</span></span><span style=display:flex><span>Unpacking objects: 100% (23/23), done.
+</span></span><span style=display:flex><span>From github.com:nightan42643/nightan42643.github.io
+</span></span><span style=display:flex><span>   f21abd4..e85fb85  master     -&gt; origin/master
+</span></span><span style=display:flex><span> * [new branch]      gh-pages   -&gt; origin/gh-pages
+</span></span><span style=display:flex><span>Updating f21abd4..e85fb85
+</span></span><span style=display:flex><span>Fast-forward
+</span></span><span style=display:flex><span> .github/workflows/gh-pages.yml | 30 ++++++++++++++++++++++++++++++
+</span></span><span style=display:flex><span> 1 file changed, 30 insertions(+)
+</span></span><span style=display:flex><span> create mode 100644 .github/workflows/gh-pages.yml
+</span></span><span style=display:flex><span>studyhugo $ 
+</span></span></code></pre></div><p>再查看所有的分支，远端现在多了一个分支<code>gh-pages</code>。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>$ git branch -a
+</span></span><span style=display:flex><span>* master
+</span></span><span style=display:flex><span>  remotes/origin/gh-pages
+</span></span><span style=display:flex><span>  remotes/origin/master
+</span></span></code></pre></div><p>不切换分支，因为<code>gh-pages</code>是由Action去发布操作的，我们不去动。我们修改本地的文件<code>my-first-post.md</code>的属性然后重新<code>push</code>一次。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>$ cat content/posts/my-first-post.md 
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>title: &#34;My First Post&#34;
+</span></span><span style=display:flex><span>date: 2021-02-16T21:53:17+08:00
+</span></span><span style=display:flex><span>draft: false
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span># My First Post
+</span></span><span style=display:flex><span>Testing.....
+</span></span></code></pre></div><p>Commit并查看log</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>studyhugo $ git add content/posts/my-first-post.md 
+</span></span><span style=display:flex><span>studyhugo $ git commit -m &#34;Published my-first-post.md&#34;
+</span></span><span style=display:flex><span>[master 52450d9] Published my-first-post.md
+</span></span><span style=display:flex><span> 1 file changed, 3 insertions(+), 2 deletions(-)
+</span></span><span style=display:flex><span>studyhugo $ git log
+</span></span><span style=display:flex><span>commit 52450d9576e468addb15f5fa719fbbcae590662a (HEAD -&gt; master)
+</span></span><span style=display:flex><span>Author: nightan &lt;nightan-pub@outlook.com&gt;
+</span></span><span style=display:flex><span>Date:   Tue Feb 16 23:11:42 2021 +0800
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Published my-first-post.md
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>commit e85fb8539e47784ec9bef21c4f3085e67ddf712f (origin/master)
+</span></span><span style=display:flex><span>Author: nightan &lt;38649296+nightan42643@users.noreply.github.com&gt;
+</span></span><span style=display:flex><span>Date:   Tue Feb 16 22:33:30 2021 +0800
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Create gh-pages.yml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>commit f21abd4cabb6479c10c64f5a96f78c8febbb1809
+</span></span><span style=display:flex><span>Author: nightan &lt;nightan-pub@outlook.com&gt;
+</span></span></code></pre></div><p>然后<code>push</code>上去。</p><p>在Actions里能看到一个新的workflow，这个workflow结束后，再次访问页面就可以看到发布后的blog了。</p><p><img src=https://pic3.zhimg.com/80/v2-bb73b3c8949688a8af99d44d929cd8aa_1440w.jpg alt=img></p><p><img src=https://pic3.zhimg.com/80/v2-f316bf8aa1093dde98eca88b5fab1bbe_1440w.jpg alt=img></p><p>但是当我访问第一篇文档的时候，遇到了问题</p><p><img src=https://pic4.zhimg.com/80/v2-0da2996b64d3680bb1464e22a4b423a7_1440w.jpg alt=img></p><p>可以很容易地看出，URL错了。</p><p>需要修改<code>config.toml</code>里的<code>baseURL</code>的参数，确保改成<code>username.github.io</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#ae81ff>$ cat config.toml </span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>baseURL = &#34;http://nightan42643.github.io&#34;</span>
+</span></span></code></pre></div><p>再<code>push</code>一次。</p><p><img src=https://pic4.zhimg.com/80/v2-63b62296cbc50fb0fba62c5a5c9b7dab_1440w.jpg alt=img></p><p><img src=https://pic2.zhimg.com/80/v2-960d09bc4d41729c91b8f14da4968019_1440w.jpg alt=img></p><p>现在可以正常访问了。</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(n){const e=window.getSelection(),t=document.createRange();t.selectNodeContents(n),e.removeAllRanges(),e.addRange(t)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#托管到github-pages>托管到Github Pages</a></li></ul></nav></div></aside></main></body></html>
