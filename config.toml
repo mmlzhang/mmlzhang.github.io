@@ -1,6 +1,6 @@
 baseURL = 'http://lanms.github.io/'
 languageCode = 'en-us'
-title = '我的Wiki'
+title = 'PyTool'
 
 
 [module]
