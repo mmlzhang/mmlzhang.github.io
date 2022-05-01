@@ -1,41 +1,48 @@
 ---
-title: Introduction
+title: 首页
 type: docs
 ---
 
-# Acerbo datus maxime
+# 首页
 
 {{< columns >}}
-## Astris ipse furtiva
+## 简介
 
-Est in vagis et Pittheus tu arge accipiter regia iram vocatur nurus. Omnes ut
-olivae sensit **arma sorori** deducit, inesset **crudus**, ego vetuere aliis,
-modo arsit? Utinam rapta fiducia valuere litora _adicit cursu_, ad facies
+学习笔记，学习成长
 
+知人者智，自知者明
+
+胜人者有力，自胜者强
 <--->
 
-## Suis quot vota
+## 名言警句
 
-Ea _furtique_ risere fratres edidit terrae magis. Colla tam mihi tenebat:
-miseram excita suadent es pecudes iam. Concilio _quam_ velatus posset ait quod
-nunc! Fragosis suae dextra geruntur functus vulgata.
+越是无能的人，越喜欢挑剔别人的错儿。 ——_爱尔兰_
+
+最具挑战性的挑战莫过于提升自我。 ——_迈克尔·F·斯特利_
+
+业余生活要有意义，不要越轨。 ——_华盛顿_
+
 {{< /columns >}}
 
 
-## Tempora nisi nunc
+## 最近更新
 
-Lorem **markdownum** emicat gestu. Cannis sol pressit ducta. **Est** Idaei,
-tremens ausim se tutaeque, illi ulnis hausit, sed, lumina cutem. Quae avis
-sequens!
+**If by Life You Were Deceived**
 
-    var panel = ram_design;
-    if (backup + system) {
-        file.readPoint = network_native;
-        sidebar_engine_device(cell_tftp_raster,
-                dual_login_paper.adf_vci.application_reader_design(
-                graphicsNvramCdma, lpi_footer_snmp, integer_model));
-    }
+_Aleksandr Pushkin_
 
-## Locis suis novi cum suoque decidit eadem
+    If by life you were deceived,
+    Don't be dismal, don't be wild!
+    In the day of grief, be mild
+    Merry days will come, believe.
 
-Idmoniae ripis, at aves, ali missa adest, ut _et autem_, et ab?
+    Heart is living in tomorrow;
+    Present is dejected here;
+    In a moment, passes sorrow;
+    That which passes will be dear.
+
+
+## 其他
+
+勇气通往天堂，怯懦通往地狱。——**塞内加**
