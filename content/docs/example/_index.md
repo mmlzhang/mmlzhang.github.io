@@ -1,5 +1,4 @@
 ---
-weight: 1000
 bookFlatSection: true
 title: "示例"
 draft: true
