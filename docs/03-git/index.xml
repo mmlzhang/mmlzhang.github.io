@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>03-Git on 工具书-mlzhang</title><link>http://lanms.github.io/docs/03-git/</link><description>Recent content in 03-Git on 工具书-mlzhang</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 30 Apr 2022 16:55:47 +0000</lastBuildDate><atom:link href="http://lanms.github.io/docs/03-git/index.xml" rel="self" type="application/rss+xml"/><item><title>01-Git基本用法和工作流程</title><link>http://lanms.github.io/docs/03-git/01-git%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%E5%92%8C%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/01-git%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%E5%92%8C%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/</guid><description>windows git操作 # 主要流程 # windows本地操作 git init (第一次要设置user.name, user.email) git add . git status git commit -m &amp;#34;修改说明&amp;#34; git remote add origin &amp;lt;远端仓库url&amp;gt; git push origin master 同步到远端 git pull 从远端下载版本到本地 远端克隆到本地 git clone &amp;lt;远端仓库的url&amp;gt; cd 仓库名 进入克隆下的仓库 git branch &amp;lt;分支名&amp;gt; 创建自己的分支修改文件 git branch -d &amp;lt;分支名&amp;gt; 删除分支 git checkout &amp;lt;分支名&amp;gt; 切换分支 修改本地文件 git add . git status (查看一下状态) git commit -m &amp;#34;修改描述&amp;#34; git remote add origin &amp;lt;远端的url&amp;gt; git push origin master &amp;lt;上传&amp;gt; 一般是以分支提交的,以master提交会覆盖主分支 git pull &amp;lt;下载远端同步&amp;gt; 合并分支, 合并前先切换到 master 里 git merge &amp;lt;分支名&amp;gt; 默认的会将分支合并道 master里 日志 git log --online 用 --graph 选项，查看历史中什么时候出现了分支、合并 git init 将文件夹变文本地仓库 notepad test.</description></item><item><title>02-Git进阶</title><link>http://lanms.github.io/docs/03-git/02-git%E8%BF%9B%E9%98%B6/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/02-git%E8%BF%9B%E9%98%B6/</guid><description>1.git push -u origin master # 由于远程仓库是空的,第一次推送master分支时, 加上 -u , git 不但会把本地的master分支内容推送到远程的新的master分支,还会把本地的master分支和远程的master分支关联起来, 在以后推送或者拉取时就可以简化命令 git checkout -b zhang # 创建分支并切换到分支 git branch zhang git checkout zhang git branch -d zhang # 删除分支 zhang git merge zhang # 合并分支 2.分支合并冲突 # git log --graph #查看分支合并图 3.撤销缓存区的内容 # git rm --cached &amp;lt;file&amp;gt;
+4.暂存分支任务 # git branch # 当前在zhang分支工作 git stash # 将当前分支暂时&amp;#39;储藏起来&amp;#39;, 等完成别的分支任务之后对其进行恢复 git checkout master # 切换到master分支 git checkout -b bug-101 # 创建新的修复bug的分支 完成修复任务后 git add .</description></item><item><title>03-Git团队开发</title><link>http://lanms.github.io/docs/03-git/03-git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/03-git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91/</guid><description>03-Git团队开发
+git clone 创建环境 当前分支 master 切换到自己的分支 ​ 测试环境1 自己的分支 15#环境
+测试环境2 test 分支 16#环境
+测试环境3 对外测试 test分支 83# 环境
+线上环境1 分支 master
+线上环境2 # 正式环境 共享数据库
+git pull origin v3.0 本地获取 v3.0
+微服务
+docker
+镜像 .iso 操作系统的文件（备份），里面有需要的环境
+容器：操作系统
+dockerfile : 启动的配置文件， 指定是哪个镜像，里面程序需要的环境</description></item><item><title>04-Git别名alias</title><link>http://lanms.github.io/docs/03-git/04-git%E5%88%AB%E5%90%8Dalias/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/04-git%E5%88%AB%E5%90%8Dalias/</guid><description>给Git设置alias别名 # 修改git的config文件，只是针对当前git仓库进行修改
+[alias] st = status ck = checkout cl = clone br = branch mg = merge cm = commit cmd = commit --amend df = diff dft = difftool mt = mergetool last = log -1 HEAD cf = config line = log --oneline latest = for-each-ref --sort=-committerdate --format=&amp;#39;%(committerdate:short) %(refname:short) [%(committername)]&amp;#39; lg = log --pretty=format:\&amp;#34;%C(yellow)%h %C(blue)%ad %C(red)%d %C(reset)%s %C(green)[%cn]\&amp;#34; --decorate --date=short graph = log --pretty=format:\&amp;#34;%C(yellow)%h %C(red)%d %C(reset)%s %C(green)[%an] %C(blue)%ad\&amp;#34; --topo-order --graph --date=short type = cat-file -t dump = cat-file -p</description></item><item><title>05-gitattributes设置文件属性</title><link>http://lanms.github.io/docs/03-git/05-gitattributes%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/05-gitattributes%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7/</guid><description>Git的gitattributes文件详解 # Git的gitattributes文件是一个文本文件，文件中的一行定义一个路径的若干个属性。
+gitattributes文件以行为单位设置一个路径下所有文件的属性，格式如下： # 要匹配的文件模式 属性1 属性2 &amp;hellip; 在gitattributes文件的一行中，一个属性（以text属性为例）可能有4种状态： # 设置text 不设置-text 设置值text=string 未声明，通常不出现该属性即可；但是为了覆盖其他文件中的声明，也可以 !text gitattributes文件示例： # * text=auto .txt text .jpg -text .vcproj text eol=crlf .sh text eol=lf .py eol=lf 说明：
+第1行，对任何文件，设置text=auto，表示文件的行尾自动转换。如果是文本文件，则在文件入Git库时，行尾自动转换为LF。如果已经在入Git库中的文件的行尾为CRLF，则该文件在入Git库时，不再转换为LF。
+第2行，对于txt文件，标记为文本文件，并进行行尾规范化。
+第3行，对于jpg文件，标记为非文本文件，不进行任何的行尾转换。
+第4行，对于vcproj文件，标记为文本文件，在文件入Git库时进行规范化，即行尾为LF。但是在检出到工作目录时，行尾自动转换为CRLF。
+第5行，对于sh文件，标记为文本文件，在文件入Git库时进行规范化，即行尾为LF。在检出到工作目录时，行尾也不会转换为CRLF（即保持LF）。
+第6行，对于py文件，只针对工作目录中的文件，行尾为LF。
+在一个Git库中可以有多个gitattributes文件： # 不同gitattributes文件中，属性设置的优先级(从高到低)：</description></item><item><title>06-gitignore设置</title><link>http://lanms.github.io/docs/03-git/06-gitignore%E8%AE%BE%E7%BD%AE/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/06-gitignore%E8%AE%BE%E7%BD%AE/</guid><description>Git的gitignore文件设置 # [TOC]
+在使用Git的过程中，我们喜欢有的文件比如日志，临时文件，编译的中间文件等不要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。
+Git 忽略文件提交的方法 # 有三种方法可以实现忽略Git中不想提交的文件。
+在Git项目中定义 .gitignore 文件 # 这种方式通过在项目的某个文件夹下定义 .gitignore 文件，在该文件中定义相应的忽略规则，来管理当前文件夹下的文件的Git提交行为。
+.gitignore 文件是可以提交到公有仓库中，这就为该项目下的所有开发者都共享一套定义好的忽略规则。
+在 .gitingore 文件中，遵循相应的语法，在每一行指定一个忽略规则。如：
+*.log *.temp /vendor 在Git项目的设置中指定排除文件 # 这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写入其中。
+需要注意的是，这种方式指定的忽略文件的根目录是项目根目录。
+定义Git全局的 .gitignore 文件 # 除了可以在项目中定义 .gitignore 文件外，还可以设置全局的 git .gitignore 文件来管理所有Git项目的行为。这种方式在不同的项目开发者之间是不共享的，是属于项目之上Git应用级别的行为。
+这种方式也需要创建相应的 .gitignore 文件，可以放在任意位置。然后在使用以下命令配置Git：
+git config --global core.excludesfile ~/.gitignore Git 忽略规则 # 详细的忽略规则可以参考官方英文文档
+Git 忽略规则优先级 # 在 .gitingore 文件中，每一行指定一个忽略规则，Git 检查忽略规则的时候有多个来源，它的优先级如下（由高到低）：
+从命令行中读取可用的忽略规则 当前目录定义的规则 父级目录定义的规则，依次递推 $GIT_DIR/info/exclude 文件中定义的规则 core.</description></item><item><title>07-Git_Flow使用方法</title><link>http://lanms.github.io/docs/03-git/07-git_flow%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/07-git_flow%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid><description>http://www.berlinix.com/it/gitflow.php
+http://www.berlinix.com/it/gitflow.php
+http://www.berlinix.com/it/git.php
+http://www.berlinix.com/it/git.php
+gitflow分支管理模型 # gitflow的分支类型：
+master分支（1个） develop分支（1个） feature分支。同时存在多个。 release分支。同一时间只有1个，生命周期很短，只是为了发布。 hotfix分支。同一时间只有1个。生命周期较短，用了修复bug或小粒度修改发布。 在这个模型中，master和develop都具有象征意义。master分支上的代码总是稳定的（stable build），随时可以发布出去。develop上的代码总是从feature上合并过来的，可以进行Nightly Builds，但不直接在develop上进行开发。当develop上的feature足够多以至于可以进行新版本的发布时，可以创建release分支。
+release分支基于develop，进行很简单的修改后就被合并到master，并打上tag，表示可以发布了。紧接着release将被合并到develop；此时develop可能往前跑了一段，出现合并冲突，需要手工解决冲突后再次合并。这步完成后就删除release分支。
+当从已发布版本中发现bug要修复时，就应用到hotfix分支了。hotfix基于master分支，完成bug修复或紧急修改后，要merge回master，打上一个新的tag，并merge回develop，删除hotfix分支。
+由此可见release和hotfix的生命周期都较短，master/develop虽然总是存在但却不常使用。
+以上就是gitflow的基本概念了。下面是nvie（gitflow的提出者，一个荷兰人！） A successful Git branching model（发布于2010年月5日）一文的笔记。
+从右看起：
+时间轴。 feature（玫红）。主要是自己玩了，差不多的时候要合并回develop去。从不与master交互。 develop（黄色）。主要是和feature以及release交互。 release（绿色）。总是基于develop，最后又合并回develop。当然对应的tag跑到master这边去了。 hotfix（红色）。总是基于master，并最后合并到master和develop。 master（蓝色）。没有什么东西，仅是一些关联的tag，因从不在master上开发。 接下来nvie说道自己喜爱git，因git改变了人们对合并/分支（merge/branches）的看法。从集中式的代码管理工具过来的人感到释放了（beware of merge conflicts, they bite you，注意合并冲突，它们会跳出来咬你！）。
+gitflow实例 # 安装gitflow：
+$ git clone --recursive git://github.com/nvie/gitflow.git $ cd gitflow/ $ sudo make install $ ls /usr/local/bin/git-flow /usr/local/bin/git-flow 到项目根目录下执行gitflow，因为之前修改没有commit，所以gitflow初始化失败：
+$ git flow init fatal: Working tree contains unstaged changes.</description></item><item><title>08-tox使用</title><link>http://lanms.github.io/docs/03-git/08-tox%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/08-tox%E4%BD%BF%E7%94%A8/</guid><description>tox
+tox是通用的虚拟环境管理和测试命令行工具，tox能够让我们在同一个Host上自定义出多套相互独立且隔离的python环境
+检查软件包能否在不同的python版本或解释器下正常安装 在不同的环境中运行测试代码 作为持续集成服务的前端，大大减少测试工作所需的时间 2、openstack社区tox使用：
+比如openstack社区的openstack-infra/project-config工程，其gerrit配置的门禁，其门禁具体执行中使用了tox执行基本语法检测。
+S1、clone该工程：
+git clone https://github.com/openstack-infra/project-config.git
+S2、查看project-config的工程门禁配置（project-config/zuul/layout.yaml截取一部分）：
+- name: openstack-infra/project-config template: - name: bindep-fallback - name: merge-check check: - gate-project-config-gerrit - gate-project-config-grafyaml - gate-project-config-layout # check阶段的门禁 - gate-project-config-linters-ubuntu-xenial - gate-project-config-irc-access - gate-project-config-jenkins-project - gate-project-config-nodepool - gate-infra-docs-index - gate-generate-specs-site - gate-project-config-dib S3、查看gate-project-config-layout的工程配置：
+（位于project-config/jenkins/jobs/infra.yaml中）
+job: name: gate-project-config-layout node: ubuntu-trusty builders: - net-info # 显示环境信息，如构建时间、ip、网络状况等 - zuul-git-prep # zuul-clone工程 - install-distro-packages # 安装相应依赖 - revoke-sudo # 取消sudo权限 - run-tox: # 调用tox的相关脚本 envlist: &amp;#39;zuul&amp;#39; publishers: - test-results - console-log S4、重点是查看builder：run-tox的配置，位于project-config/jenkins/jobs/macros.</description></item><item><title>09-git_rebase</title><link>http://lanms.github.io/docs/03-git/09-git_rebase/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/09-git_rebase/</guid><description>参考链接
+https://www.jianshu.com/p/4a8f4af4e803</description></item><item><title>Untitled</title><link>http://lanms.github.io/docs/03-git/untitled/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/untitled/</guid><description/></item><item><title>常用命令</title><link>http://lanms.github.io/docs/03-git/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/03-git/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description/></item></channel></rss>

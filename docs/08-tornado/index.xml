@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>08-Tornado on 工具书-mlzhang</title><link>http://lanms.github.io/docs/08-tornado/</link><description>Recent content in 08-Tornado on 工具书-mlzhang</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 30 Apr 2022 16:55:47 +0000</lastBuildDate><atom:link href="http://lanms.github.io/docs/08-tornado/index.xml" rel="self" type="application/rss+xml"/><item><title>01-基础开始tornado</title><link>http://lanms.github.io/docs/08-tornado/01-%E5%9F%BA%E7%A1%80%E5%BC%80%E5%A7%8Btornado/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/08-tornado/01-%E5%9F%BA%E7%A1%80%E5%BC%80%E5%A7%8Btornado/</guid><description>Tornado简介 # Tornado全称Tornado Web Server，是一个用Python语言写成的Web服务器兼Web应用框架，由FriendFeed公司在自己的网站FriendFeed中使用，被Facebook收购以后框架在2009年9月以开源软件形式开放给大众。
+特点：
+作为Web框架，是一个轻量级的Web框架，类似于另一个Python web框架Web.py，其拥有异步非阻塞IO的处理方式。 作为Web服务器，Tornado有较为出色的抗负载能力，官方用nginx反向代理的方式部署Tornado和其它Python web应用框架进行对比，结果最大浏览量超过第二名近40%。 Tornado的特性 # HTTP服务器 # Tornado为了高效实现Comet/后端异步调用HTTP接口，是直接内嵌了HTTP服务器。
+前端无需加apache / lighttpd / nginx等也可以供浏览器访问；但它并没有完整实现HTTP 1.1的协议，所以官方文档是推荐用户在生产环境下在前端使用nginx，后端反向代理到多个Tornado实例。
+Tornado本身是单线程的异步网络程序，它默认启动时，会根据CPU数量运行多个实例；充分利用CPU多核的优势。
+单线程异步 # 网站基本都会有数据库操作，而Tornado是单线程的，这意味着如果数据库查询返回过慢，整个服务器响应会被堵塞。
+数据库查询，实质上也是远程的网络调用；理想情况下，是将这些操作也封装成为异步的；但Tornado对此并没有提供任何支持。
+这是Tornado的设计，而不是缺陷。
+一个系统，要满足高流量；是必须解决数据库查询速度问题的！
+数据库若存在查询性能问题，整个系统无论如何优化，数据库都会是瓶颈，拖慢整个系统！
+异步并不能从本质上提到系统的性能；它仅仅是避免多余的网络响应等待，以及切换线程的CPU耗费。
+如果数据库查询响应太慢，需要解决的是数据库的性能问题；而不是调用数据库的前端Web应用。
+对于实时返回的数据查询，理想情况下需要确保所有数据都在内存中，数据库硬盘IO应该为0；这样的查询才能足够快；而如果数据库查询足够快，那么前端web应用也就无将数据查询封装为异步的必要。
+就算是使用协程，异步程序对于同步程序始终还是会提高复杂性；需要衡量的是处理这些额外复杂性是否值得。
+如果后端有查询实在是太慢，无法绕过，Tornaod的建议是将这些查询在后端封装独立封装成为HTTP接口，然后使用Tornado内置的异步HTTP客户端进行调用。
+开始 tornado 项目 # # -*-coding: utf-8 -*- import tornado.web import tornado.ioloop # 引入 httpserver 模块 import tornado.httpserver class IndexHandler(tornado.web.RequestHandler): def get(self, *args, **kwargs): self.</description></item><item><title>02-options参数获取</title><link>http://lanms.github.io/docs/08-tornado/02-options%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/08-tornado/02-options%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96/</guid><description>02-
+options 参数获取 # tornado.options 经行全局的参数定义，转换，存储
+tornado.options.define() # 参数 name 变量名,唯一性 default 设置选项变量的默认值 type 设置选项变量的类型,进行输入的值的转换， str int float 等 multiple 设置选项变量是否可以为多个值，默认为False help 选项变量的帮助体视信息 # 例如 tornado.options.define(name=&amp;#34;port&amp;#34;,default=8000,type=int) tornado.options.options 全局的options 对象，多有定义的选项变量都会成为其的属性 如 ： tornado.options.options.port
+命令行获取参数 # tornado.options.parse_command_line() 获取命令行参数，转化为 tornado 的参数
+# -*-coding: utf-8 -*- import tornado.web import tornado.ioloop # 引入 httpserver 模块 import tornado.httpserver import tornado.options # 定义 options 的变量的方法，定义参数 tornado.options.define(&amp;#39;port&amp;#39;, default=8000) class IndexHandler(tornado.</description></item><item><title>03-请求核响应01</title><link>http://lanms.github.io/docs/08-tornado/03-%E8%AF%B7%E6%B1%82%E6%A0%B8%E5%93%8D%E5%BA%9401/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/08-tornado/03-%E8%AF%B7%E6%B1%82%E6%A0%B8%E5%93%8D%E5%BA%9401/</guid><description>03-请求核响应01</description></item><item><title>部署方法</title><link>http://lanms.github.io/docs/08-tornado/%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/08-tornado/%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95/</guid><description>Tornado部署方法 # 因为Tornado是异步的网络框架，性能够好，可以直接放在最外层，但是为了避免阻塞问题，会开多个进程，然后使用 Nginx 做反向代理实现负载均衡。具体可以看这篇文章 Introduction to Tornado 中文翻译。
+那么这里就涉及到要开多个Tornado进程的问题，使用Supervisor来做这件事是最简单的。Supervisor 的使用方法可以看这篇文章 Python 进程管理工具 Supervisor 使用教程
+另外，如果你需要部署Django或者 Flask，则推荐 Nginx+Gunicorn+Supervisor
+Nginx放在最外层，然后使用Supervisor做进程管理，使用Gunicorn启动Django或者Flask，相较于uwsgi 的方法，简单很多，而且Gunicorn可以让你使用Gevent和Tornado来为你的后端实现异步访问，性能直接飙升。
+作者：淡水
+链接：https://www.zhihu.com/question/21018409/answer/164837163
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</description></item></channel></rss>

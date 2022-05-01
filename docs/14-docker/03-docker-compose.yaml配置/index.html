@@ -1,0 +1,635 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="docker compose 在 Docker 容器运用中具有很大的学习意义，docker compose 是一个整合发布应用的利器。而使用 docker compose 时，懂得如何编排 docker compose 配置文件是很重要的。
+一. 前言 #  关于 docker compose 技术可以查看官方文档 Docker Compose
+以下的内容是确立在已经下载好 Docker 以及 Docker Compose，可参看 Docker Compose 的官方安装教程 Install Docker Compose
+二. Docker Compose 配置文件的构建参数说明
+首先，官方提供了一个 yaml Docker Compose 配置文件的标准例子
+version: &ldquo;3&rdquo; services:
+redis: image: redis:alpine ports: - &ldquo;6379&rdquo; networks: - frontend deploy: replicas: 2 update_config: parallelism: 2 delay: 10s restart_policy: condition: on-failure
+db: image: postgres:9.4 volumes: - db-data:/var/lib/postgresql/data networks: - backend deploy: placement: constraints: [node."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="03-docker-compose"><meta property="og:description" content="docker compose 在 Docker 容器运用中具有很大的学习意义，docker compose 是一个整合发布应用的利器。而使用 docker compose 时，懂得如何编排 docker compose 配置文件是很重要的。
+一. 前言 #  关于 docker compose 技术可以查看官方文档 Docker Compose
+以下的内容是确立在已经下载好 Docker 以及 Docker Compose，可参看 Docker Compose 的官方安装教程 Install Docker Compose
+二. Docker Compose 配置文件的构建参数说明
+首先，官方提供了一个 yaml Docker Compose 配置文件的标准例子
+version: &ldquo;3&rdquo; services:
+redis: image: redis:alpine ports: - &ldquo;6379&rdquo; networks: - frontend deploy: replicas: 2 update_config: parallelism: 2 delay: 10s restart_policy: condition: on-failure
+db: image: postgres:9.4 volumes: - db-data:/var/lib/postgresql/data networks: - backend deploy: placement: constraints: [node."><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/14-docker/03-docker-compose.yaml%E9%85%8D%E7%BD%AE/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2022-04-30T16:55:47+00:00"><meta property="article:modified_time" content="2022-04-30T16:55:47+00:00"><title>03-docker-compose | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.297e820a0233177c8f4ec22aa3068daedfb2374f7babb07e82e01b9a7eb2e7da.js integrity="sha256-KX6CCgIzF3yPTsIqowaNrt+yN097q7B+guAbmn6y59o=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>工具书-mlzhang</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><input type=checkbox id=section-bedf8681ad0a48b597e0543c210679d7 class=toggle>
+<label for=section-bedf8681ad0a48b597e0543c210679d7 class="flex justify-between"><a role=button>01-Hugo搭建博客</a></label><ul><li><a href=/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/>Hugo搭建博客</a></li><li><a href=/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/github%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1/>Github静态页面托管</a></li><li><a href=/docs/01-hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/>添加阿里云域名解析</a></li></ul></li><li><input type=checkbox id=section-b78f610652cf841e3deb7972b53b98bc class=toggle>
+<label for=section-b78f610652cf841e3deb7972b53b98bc class="flex justify-between"><a role=button>00-安装脚本</a></label><ul><li><a href=/docs/00-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/nginx_uwsgi/>Nginx_uwsgi</a></li><li><a href=/docs/00-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/%E5%AE%89%E8%A3%85mariadb/>安装mariaDB</a></li><li><a href=/docs/00-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/%E5%AE%89%E8%A3%85python3.6/>安装python3</a></li></ul></li><li><input type=checkbox id=section-4ac78bf9efbed769db3bdcc4fadfc3a2 class=toggle>
+<label for=section-4ac78bf9efbed769db3bdcc4fadfc3a2 class="flex justify-between"><a role=button>01-python基础</a></label><ul><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/01-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C-os%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E8%BF%99%E6%AD%A3%E5%88%99/>01-字符串操作-os文件操作-时间日期对象-面向对象-这正则</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/02-%E5%87%BD%E6%95%B0-reduce-map-nonloca/>02-函数-reduce()-map()-nonloca</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/03-stringio/>03-stringIO</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/04-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp-udp-bs64/>04-网络编程-TCP-UDP-BS64</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/05-yield%E5%87%BD%E6%95%B0/>05-yield函数</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/06-python%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/>06-Python操作数据库</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/07-%E8%A3%85%E9%A5%B0%E5%99%A8/>07-装饰器</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/08-%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/>08-递归函数</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/09-%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B/>09-线程和进程</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/10-%E5%8D%8F%E7%A8%8B%E5%92%8Caiohttp/>10-协程和aiohttp</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/11-%E5%85%83%E7%B1%BB/>11-元类</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/12-anaconda%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/>12-Anaconda创建虚拟环境</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/13-py2%E5%92%8Cpy3%E7%9A%84%E5%8C%BA%E5%88%AB/>13-py2和py3的区别</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/14-%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95%E6%B1%87%E6%80%BB/>14-函数的用法汇总</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/15-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E5%BA%93/>15-python内置函数库</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/>shell脚本语言</a></li><li><a href=/docs/01-python%E5%9F%BA%E7%A1%80/%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95/>一些函数的用法</a></li></ul></li><li><input type=checkbox id=section-ee5f1d736f38101aa1387ddb1895afd8 class=toggle>
+<label for=section-ee5f1d736f38101aa1387ddb1895afd8 class="flex justify-between"><a role=button>02-前端HTML-js-css</a></label><ul><li><a href=/docs/02-%E5%89%8D%E7%AB%AFhtml-js-css/01-html%E6%A0%87%E7%AD%BE%E5%92%8Ccss%E6%A0%B7%E5%BC%8F%E8%A1%A8/>01-HTML标签和CSS样式表</a></li><li><a href=/docs/02-%E5%89%8D%E7%AB%AFhtml-js-css/02-javascript-jquary-ajax/>02-Javascript-JQuary-Ajax</a></li><li><a href=/docs/02-%E5%89%8D%E7%AB%AFhtml-js-css/js%E4%B8%ADcookie%E5%80%BC%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E8%8E%B7%E5%8F%96/>js中cookie值的设置和获取</a></li></ul></li><li><input type=checkbox id=section-8cca7d9cdaa4fd0ac0539752bdf7b4d6 class=toggle>
+<label for=section-8cca7d9cdaa4fd0ac0539752bdf7b4d6 class="flex justify-between"><a role=button>03-Git</a></label><ul><li><a href=/docs/03-git/01-git%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%E5%92%8C%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/>01-Git基本用法和工作流程</a></li><li><a href=/docs/03-git/02-git%E8%BF%9B%E9%98%B6/>02-Git进阶</a></li><li><a href=/docs/03-git/03-git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91/>03-Git团队开发</a></li><li><a href=/docs/03-git/04-git%E5%88%AB%E5%90%8Dalias/>04-Git别名alias</a></li><li><a href=/docs/03-git/05-gitattributes%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7/>05-gitattributes设置文件属性</a></li><li><a href=/docs/03-git/06-gitignore%E8%AE%BE%E7%BD%AE/>06-gitignore设置</a></li><li><a href=/docs/03-git/07-git_flow%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/>07-Git_Flow使用方法</a></li><li><a href=/docs/03-git/08-tox%E4%BD%BF%E7%94%A8/>08-tox使用</a></li><li><a href=/docs/03-git/09-git_rebase/>09-git_rebase</a></li><li><a href=/docs/03-git/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/>常用命令</a></li></ul></li><li><input type=checkbox id=section-4da4af1a651273d9ba8c2dff9ae4706f class=toggle>
+<label for=section-4da4af1a651273d9ba8c2dff9ae4706f class="flex justify-between"><a role=button>04-数据库</a></label><ul><li><a href=/docs/04-%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/>各种数据库读写分离小结</a></li></ul></li><li><input type=checkbox id=section-d2d2f644095dd7a076c04eb644e8556b class=toggle>
+<label for=section-d2d2f644095dd7a076c04eb644e8556b class="flex justify-between"><a role=button>05-Linux</a></label><ul><li><a href=/docs/05-linux/01-linux%E6%93%8D%E4%BD%9C%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA/>01-Linux操作,阿里云主机</a></li><li><a href=/docs/05-linux/02-linux%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%B2%E7%81%AB%E5%A2%99/>02-Linux安装软件服务器,防火墙</a></li><li><a href=/docs/05-linux/03-vim%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/>03-vim文本编辑器</a></li><li><a href=/docs/05-linux/04-redis%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/>04-redis安装配置</a></li><li><a href=/docs/05-linux/05-%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E4%BB%BB%E5%8A%A1/>05-定时执行脚本任务</a></li><li><a href=/docs/05-linux/06-linux%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/>06-Linux操作命令</a></li><li><a href=/docs/05-linux/07-linux%E5%91%BD%E4%BB%A4cat-find/>07-Linux命令cat-find</a></li><li><a href=/docs/05-linux/08-centos7%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%B1%95%E7%A3%81%E7%9B%98/>08-Centos7虚拟机扩展磁盘</a></li><li><a href=/docs/05-linux/09-alias%E7%BC%96%E8%BE%91%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4/>09-alias编辑系统命令</a></li><li><a href=/docs/05-linux/10-linux%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%E5%91%BD%E4%BB%A4/>10-Linux安装工具命令</a></li><li><a href=/docs/05-linux/10-ubantu%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%E5%91%BD%E4%BB%A4/>10-ubantu安装工具命令</a></li></ul></li><li><input type=checkbox id=section-fcaf79fa010525235e9c02d2292c09e1 class=toggle>
+<label for=section-fcaf79fa010525235e9c02d2292c09e1 class="flex justify-between"><a role=button>06-Django</a></label><ul></ul></li><li><input type=checkbox id=section-34e22bee867c2ec9604e9fe143e7bc00 class=toggle>
+<label for=section-34e22bee867c2ec9604e9fe143e7bc00 class="flex justify-between"><a role=button>07-Flask</a></label><ul></ul></li><li><input type=checkbox id=section-db15b7fa49c62b26be2b9a42b704ae65 class=toggle>
+<label for=section-db15b7fa49c62b26be2b9a42b704ae65 class="flex justify-between"><a role=button>08-Tornado</a></label><ul><li><a href=/docs/08-tornado/01-%E5%9F%BA%E7%A1%80%E5%BC%80%E5%A7%8Btornado/>01-基础开始tornado</a></li><li><a href=/docs/08-tornado/02-options%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96/>02-options参数获取</a></li><li><a href=/docs/08-tornado/03-%E8%AF%B7%E6%B1%82%E6%A0%B8%E5%93%8D%E5%BA%9401/>03-请求核响应01</a></li><li><a href=/docs/08-tornado/%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95/>部署方法</a></li></ul></li><li><input type=checkbox id=section-ffe29355398cb5e5fbcb7014db51e385 class=toggle>
+<label for=section-ffe29355398cb5e5fbcb7014db51e385 class="flex justify-between"><a role=button>09-爬虫Scrapy</a></label><ul></ul></li><li><input type=checkbox id=section-89d843abaf0e16c5973def7508f4dea9 class=toggle>
+<label for=section-89d843abaf0e16c5973def7508f4dea9 class="flex justify-between"><a role=button>10-优化</a></label><ul><li><a href=/docs/10-%E4%BC%98%E5%8C%96/celery%E5%92%8Crabbitmq/>Celery和RabbitMQ</a></li><li><a href=/docs/10-%E4%BC%98%E5%8C%96/mysql%E4%B8%BB%E4%BB%8E%E5%88%86%E7%A6%BB/>MySQL主从分离</a></li><li><a href=/docs/10-%E4%BC%98%E5%8C%96/mysql%E4%BC%98%E5%8C%96/>MySQL优化</a></li><li><a href=/docs/10-%E4%BC%98%E5%8C%96/%E4%B8%B4%E6%97%B6%E7%AC%94%E8%AE%B0/>临时笔记</a></li><li><a href=/docs/10-%E4%BC%98%E5%8C%96/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/>单元测试</a></li></ul></li><li><input type=checkbox id=section-572e721f6e43078bfa32034e84bbe4b4 class=toggle>
+<label for=section-572e721f6e43078bfa32034e84bbe4b4 class="flex justify-between"><a role=button>11-Python设计模式</a></label><ul><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/00-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D/>00-Python设计模式介绍</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/01-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/>01-工厂模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/02-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/>02-建造者模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/03-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/>03-原型模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/04-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/>04-适配器模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/05-%E4%BF%AE%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/>05-修饰器模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/06-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>06-外观模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/07-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/>07-享元模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/08-mvc%E6%A8%A1%E5%BC%8F/>08-MVC模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/09-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/>09-代理模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/10-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/>10-责任链模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/11-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/>11-命令模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/12-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/>12-解释器模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/13-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/>13-观察者模式</a></li><li><a href=/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/14-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/>14-状态模式</a></li></ul></li><li><input type=checkbox id=section-601bd63086df0516f1ded16b28f48a23 class=toggle>
+<label for=section-601bd63086df0516f1ded16b28f48a23 class="flex justify-between"><a role=button>12-机器学习数据分析sklearn</a></label><ul></ul></li><li><input type=checkbox id=section-4a497c000e3d6340562da26fb030ea6b class=toggle>
+<label for=section-4a497c000e3d6340562da26fb030ea6b class="flex justify-between"><a role=button>13-tensorflow</a></label><ul><li><a href=/docs/13-tensorflow/01-tensorflow%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/>01-tensorflow环境搭建</a></li><li><a href=/docs/13-tensorflow/02-tf%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%A8%A1%E6%8B%9F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/>02-tf基础知识和模拟线性回归</a></li><li><a href=/docs/13-tensorflow/03-%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/>03-基础指令</a></li></ul></li><li><input type=checkbox id=section-1b4820c28a98067c0fef5225173ee99e class=toggle checked>
+<label for=section-1b4820c28a98067c0fef5225173ee99e class="flex justify-between"><a role=button>14-docker</a></label><ul><li><a href=/docs/14-docker/01-centos7%E5%AE%89%E8%A3%85docker/>01-CentOS7安装docker</a></li><li><a href=/docs/14-docker/02-docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/>02-Docker常用命令</a></li><li><a href=/docs/14-docker/03-docker-compose.yaml%E9%85%8D%E7%BD%AE/ class=active>03-docker-compose</a></li></ul></li><li><input type=checkbox id=section-7fe75dce01e7dbdc6caf2191b7f35824 class=toggle>
+<label for=section-7fe75dce01e7dbdc6caf2191b7f35824 class="flex justify-between"><a role=button>15-集成开发</a></label><ul><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/01-git_flow%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/>01-git_flow工作流使用指南</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/02-jenkins%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%9701/>02-jenkins配置指南01</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/03-jenkins%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%9702/>03-jenkins配置指南02</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/05-pycharm%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90%E8%AE%BE%E7%BD%AE/>05-Pycharm代码风格集成设置</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/06-pycharm%E9%9B%86%E6%88%90%E6%A3%80%E6%9F%A5%E5%B7%A5%E5%85%B7/>06-Pycharm集成检查工具</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/08-tox%E9%9B%86%E6%88%90%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/>08-tox集成使用指南</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/10-git_rebase/>10-git_rebase</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/celery%E7%9A%84%E4%BD%BF%E7%94%A8/>celery的使用</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/docker%E4%BD%BF%E7%94%A8/>Docker使用</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/memcached%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%90%AF%E5%8A%A8/>memcached的安装和启动</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/rabbitmq%E4%BD%BF%E7%94%A8/>rabbitmq使用</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/scrapyd%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/>scrapyd使用方法</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/spiderkeeper%E6%8E%A5%E5%8F%A3/>spiderKeeper接口</a></li><li><a href=/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/%E5%91%BD%E4%BB%A4/>命令</a></li></ul></li><li><input type=checkbox id=section-ad28360255e5707f82f748667937828d class=toggle>
+<label for=section-ad28360255e5707f82f748667937828d class="flex justify-between"><a role=button>16-面试题</a></label><ul></ul></li><li><input type=checkbox id=section-9ae7bb7204f29d395ff4374aa648c2d6 class=toggle>
+<label for=section-9ae7bb7204f29d395ff4374aa648c2d6 class="flex justify-between"><a role=button>17-emacs</a></label><ul><li><a href=/docs/17-emacs/emacs%E9%85%8D%E7%BD%AE/>emacs配置</a></li></ul></li></ul><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>03-docker-compose</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#一-前言>一. 前言</a></li><li><a href=#配置选项>配置选项</a></li></ul></li></ul></nav></aside></header><article class=markdown><p>docker compose 在 Docker 容器运用中具有很大的学习意义，docker compose 是一个整合发布应用的利器。而使用 docker compose 时，懂得如何编排 docker compose 配置文件是很重要的。</p><h3 id=一-前言>一. 前言
+<a class=anchor href=#%e4%b8%80-%e5%89%8d%e8%a8%80>#</a></h3><p>关于 docker compose 技术可以查看官方文档 Docker Compose</p><p>以下的内容是确立在已经下载好 Docker 以及 Docker Compose，可参看 Docker Compose 的官方安装教程 Install Docker Compose</p><p>二. Docker Compose 配置文件的构建参数说明</p><p>首先，官方提供了一个 yaml Docker Compose 配置文件的标准例子</p><p>version: &ldquo;3&rdquo;
+services:</p><p>redis:
+image: redis:alpine
+ports:
+- &ldquo;6379&rdquo;
+networks:
+- frontend
+deploy:
+replicas: 2
+update_config:
+parallelism: 2
+delay: 10s
+restart_policy:
+condition: on-failure</p><p>db:
+image: postgres:9.4
+volumes:
+- db-data:/var/lib/postgresql/data
+networks:
+- backend
+deploy:
+placement:
+constraints: [node.role == manager]</p><p>vote:
+image: dockersamples/examplevotingapp_vote:before
+ports:
+- 5000:80
+networks:
+- frontend
+depends_on:
+- redis
+deploy:
+replicas: 2
+update_config:
+parallelism: 2
+restart_policy:
+condition: on-failure</p><p>result:
+image: dockersamples/examplevotingapp_result:before
+ports:
+- 5001:80
+networks:
+- backend
+depends_on:
+- db
+deploy:
+replicas: 1
+update_config:
+parallelism: 2
+delay: 10s
+restart_policy:
+condition: on-failure</p><p>worker:
+image: dockersamples/examplevotingapp_worker
+networks:
+- frontend
+- backend
+deploy:
+mode: replicated
+replicas: 1
+labels: [APP=VOTING]
+restart_policy:
+condition: on-failure
+delay: 10s
+max_attempts: 3
+window: 120s
+placement:
+constraints: [node.role == manager]</p><p>visualizer:
+image: dockersamples/visualizer:stable
+ports:
+- &ldquo;8080:8080&rdquo;
+stop_grace_period: 1m30s
+volumes:
+- &ldquo;/var/run/docker.sock:/var/run/docker.sock&rdquo;
+deploy:
+placement:
+constraints: [node.role == manager]</p><p>networks:
+frontend:
+backend:</p><p>volumes:
+db-data:</p><p>此文件配置了多个服务，关于此配置文件的各个语句含义就需要弄懂配置选项的含义了</p><p>文件配置
+compose 文件是一个定义服务、 网络和卷的 YAML 文件 。Compose 文件的默认路径是 ./docker-compose.yml</p><p>提示：可以是用 .yml 或 .yaml 作为文件扩展名</p><p>服务定义包含应用于为该服务启动的每个容器的配置，就像传递命令行参数一样 docker container create。同样，网络和卷的定义类似于 docker network create 和 docker volume create。</p><p>正如 docker container create 在 Dockerfile 指定选项，如 CMD、 EXPOSE、VOLUME、ENV，在默认情况下，你不需要再次指定它们docker-compose.yml。</p><p>可以使用 Bash 类 ${VARIABLE} 语法在配置值中使用环境变量。</p><h3 id=配置选项>配置选项
+<a class=anchor href=#%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9>#</a></h3><p>１.bulid
+服务除了可以基于指定的镜像，还可以基于一份 Dockerfile，在使用 up 启动之时执行构建任务，这个构建标签就是 build，它可以指定 Dockerfile 所在文件夹的路径。Compose 将会利用它自动构建这个镜像，然后使用这个镜像启动服务容器</p><p>build: /path/to/build/dir</p><p>也可以是相对路径</p><p>build: ./dir</p><p>设定上下文根目录，然后以该目录为准指定 Dockerfile</p><p>build:
+context: ../
+dockerfile: path/of/Dockerfile</p><p>例子</p><p>version: &lsquo;3&rsquo;
+services:
+webapp:
+build: ./dir</p><p>如果 context 中有指定的路径，并且可以选定 Dockerfile 和 args。那么 arg 这个标签，就像 Dockerfile 中的 ARG 指令，它可以在构建过程中指定环境变量，但是在构建成功后取消，在 docker-compose.yml 文件中也支持这样的写法：</p><p>version: &lsquo;3&rsquo;
+services:
+webapp:
+build:
+context: ./dir
+dockerfile: Dockerfile-alternate
+args:
+buildno: 1</p><p>与 ENV 不同的是，ARG 可以为空值</p><p>args:</p><ul><li>buildno</li><li>password</li></ul><p>如果要指定 image 以及 build ，选项格式为</p><p>build: ./dir
+image: webapp:tag</p><p>这会在 ./dir 目录生成一个名为 webaapp 和标记为 tag 的镜像</p><p>Note:当用(Version 3) Compose 文件在群集模式下部署堆栈时，该选项被忽略。因为 docker stack 命令只接受预先构建的镜像</p><ol start=2><li>context
+context 选项可以是 Dockerfile 的文件路径，也可以是到链接到 git 仓库的 url</li></ol><p>当提供的值是相对路径时，它被解析为相对于撰写文件的路径，此目录也是发送到 Docker 守护进程的 context</p><p>build:
+context: ./dir</p><p>３. dockerfile
+使用此 dockerfile 文件来构建，必须指定构建路径</p><p>build:
+context: .
+dockerfile: Dockerfile-alternate</p><p>４. args
+添加构建参数，这些参数是仅在构建过程中可访问的环境变量</p><p>首先， 在Dockerfile中指定参数：</p><p>ARG buildno
+ARG password</p><p>RUN echo &ldquo;Build number: $buildno&rdquo;
+RUN script-requiring-password.sh &ldquo;$password&rdquo;</p><p>然后指定 build 下的参数,可以传递映射或列表</p><p>build:
+context: .
+args:
+buildno: 1
+password: secret</p><p>或</p><p>build:
+context: .
+args:</p><pre><code>- buildno=1
+- password=secret
+</code></pre><p>指定构建参数时可以省略该值，在这种情况下，构建时的值默认构成运行环境中的值</p><p>args:</p><ul><li>buildno</li><li>password</li></ul><p>Note： YAML 布尔值（true，false，yes，no，on，off）必须使用引号括起来，以为了能够正常被解析为字符串</p><p>５. cache_from
+编写缓存解析镜像列表</p><p>build:
+context: .
+cache_from:
+- alpine:latest
+- corp/web_app:3.14</p><ol start=6><li>labels
+使用 Docker标签 将元数据添加到生成的镜像中，可以使用数组或字典。</li></ol><p>建议使用反向 DNS 标记来防止签名与其他软件所使用的签名冲突</p><p>build:
+context: .
+labels:
+com.example.description: &ldquo;Accounting webapp&rdquo;
+com.example.department: &ldquo;Finance&rdquo;
+com.example.label-with-empty-value: ""</p><p>或</p><p>build:
+context: .
+labels:</p><pre><code>- &quot;com.example.description=Accounting webapp&quot;
+- &quot;com.example.department=Finance&quot;
+- &quot;com.example.label-with-empty-value&quot;
+</code></pre><p>7.shm_size
+设置容器 /dev/shm 分区的大小，值为表示字节的整数值或表示字符的字符串</p><p>build:
+context: .
+shm_size: &lsquo;2gb&rsquo;</p><p>或</p><p>build:
+context: .
+shm_size: 10000000</p><ol start=8><li>target
+根据对应的 Dockerfile 构建指定 Stage</li></ol><p>build:
+context: .
+target: prod</p><ol start=9><li>cap_add、cap_drop
+添加或删除容器功能，可查看 man 7 capabilities</li></ol><p>cap_add:</p><ul><li>ALL</li></ul><p>cap_drop:</p><ul><li>NET_ADMIN</li><li>SYS_ADMIN</li></ul><p>Note:当用(Version 3) Compose 文件在群集模式下部署堆栈时，该选项被忽略。因为 docker stack 命令只接受预先构建的镜像</p><ol start=10><li>command
+覆盖容器启动后默认执行的命令</li></ol><p>command: bundle exec thin -p 3000</p><p>该命令也可以是一个列表，方法类似于 dockerfile:</p><p>command: [&ldquo;bundle&rdquo;, &ldquo;exec&rdquo;, &ldquo;thin&rdquo;, &ldquo;-p&rdquo;, &ldquo;3000&rdquo;]</p><ol start=11><li>configs
+使用服务 configs 配置为每个服务赋予相应的访问权限，支持两种不同的语法。</li></ol><p>Note: 配置必须存在或在 configs 此堆栈文件的顶层中定义，否则堆栈部署失效</p><p>1.SHORT 语法
+SHORT 语法只能指定配置名称，这允许容器访问配置并将其安装在 /&lt;config_name> 容器内，源名称和目标装入点都设为配置名称。</p><p>version: &ldquo;3.3&rdquo;
+services:
+redis:
+image: redis:latest
+deploy:
+replicas: 1
+configs:</p><pre><code>  - my_config
+  - my_other_config
+</code></pre><p>configs:
+my_config:
+file: ./my_config.txt
+my_other_config:
+external: true</p><p>以上实例使用 SHORT 语法将 redis 服务访问授予 my_config 和 my_other_config ,并被 my_other_config 定义为外部资源，这意味着它已经在 Docker 中定义。可以通过 docker config create 命令或通过另一个堆栈部署。如果外部部署配置都不存在，则堆栈部署会失败并出现 config not found 错误。</p><p>Note: config 定义仅在 3.3 版本或在更高版本的撰写文件格式中受支持，YAML 的布尔值（true, false, yes, no, on, off）必须要使用引号引起来（单引号、双引号均可），否则会当成字符串解析。</p><ol start=2><li>LONG 语法
+LONG 语法提供了创建服务配置的更加详细的信息</li></ol><p>source:Docker 中存在的配置的名称
+target:要在服务的任务中装载的文件的路径或名称。如果未指定则默认为 /
+uid 和 gid:在服务的任务容器中拥有安装的配置文件的数字 UID 或 GID。如果未指定，则默认为在Linux上。Windows不支持。
+mode:在服务的任务容器中安装的文件的权限，以八进制表示法。例如，0444 代表文件可读的。默认是 0444。如果配置文件无法写入，是因为它们安装在临时文件系统中，所以如果设置了可写位，它将被忽略。可执行位可以设置。如果您不熟悉 UNIX 文件权限模式，Unix Permissions Calculator
+下面示例在容器中将 my_config 名称设置为 redis_config，将模式设置为 0440（group-readable）并将用户和组设置为 103。该　｀redis　服务无法访问 my_other_config 配置。</p><p>version: &ldquo;3.3&rdquo;
+services:
+redis:
+image: redis:latest
+deploy:
+replicas: 1
+configs:</p><pre><code>  - source: my_config
+    target: /redis_config
+    uid: '103'
+    gid: '103'
+    mode: 0440
+</code></pre><p>configs:
+my_config:
+file: ./my_config.txt
+my_other_config:
+external: true</p><p>18
+可以同时授予多个配置的服务相应的访问权限，也可以混合使用 LONG 和 SHORT 语法。定义配置并不意味着授予服务访问权限。</p><ol start=12><li>cgroup_parent
+可以为容器选择一个可选的父 cgroup</li></ol><p>cgroup_parent: m-executor-abcd</p><p>注意：当 使用（Version 3）Compose 文件在群集模式下部署堆栈时，忽略此选项</p><ol start=13><li>container_name
+为自定义的容器指定一个名称，而不是使用默认的名称</li></ol><p>container_name: my-web-container</p><p>因为 docker 容器名称必须是唯一的，所以如果指定了一个自定义的名称，不能扩展一个服务超过 1 个容器</p><ol start=14><li>credential_spec
+为托管服务账户配置凭据规范，此选项仅适用于 Windows 容器服务</li></ol><p>在 credential_spec 上的配置列表格式为 file:// 或 registry://</p><p>使用 file: 应该注意引用的文件必须存在于　CredentialSpecs,docker 数据目录的子目录中。在 Windows 上，该目录默认为 C:\ProgramData\Docker\。以下示例从名为C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json 的文件加载凭证规范 ：</p><p>credential_spec:
+file: my-credential-spec.json
+使用 registry: 将从守护进程主机上的 Windows 注册表中读取凭据规范。其注册表值必须位于：</p><p>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs
+1
+下面的示例通过 my-credential-spec 注册表中指定的值加载凭证规范：</p><p>credential_spec:
+registry: my-credential-spec</p><ol start=15><li>deploy
+指定与部署和运行服务相关的配置</li></ol><p>version: &lsquo;3&rsquo;
+services:
+redis:
+image: redis:alpine
+deploy:
+replicas: 6
+update_config:
+parallelism: 2
+delay: 10s
+restart_policy:
+condition: on-failure</p><p>这里有几个子选项</p><ol><li>endpoint_mode
+指定连接到群组外部客户端服务发现方法</li></ol><p>endpoint_mode:vip ：Docker 为该服务分配了一个虚拟 IP(VIP),作为客户端的 “前端“ 部位用于访问网络上的服务。
+endpoint_mode: dnsrr : DNS轮询（DNSRR）服务发现不使用单个虚拟 IP。Docker为服务设置 DNS 条目，使得服务名称的 DNS 查询返回一个 IP 地址列表，并且客户端直接连接到其中的一个。如果想使用自己的负载平衡器，或者混合 Windows 和 Linux 应用程序，则 DNS 轮询调度（round-robin）功能就非常实用。
+version: &ldquo;3.3&rdquo;</p><p>services:
+wordpress:
+image: wordpress
+ports:
+- 8080:80
+networks:
+- overlay
+deploy:
+mode: replicated
+replicas: 2
+endpoint_mode: vip</p><p>mysql:
+image: mysql
+volumes:
+- db-data:/var/lib/mysql/data
+networks:
+- overlay
+deploy:
+mode: replicated
+replicas: 2
+endpoint_mode: dnsrr</p><p>volumes:
+db-data:</p><p>networks:
+overlay:</p><p>相关信息：Swarm 模式 CLI 命令 、Configure 服务发现</p><p>2.labels
+指定服务的标签，这些标签仅在服务上设置。</p><p>version: &ldquo;3&rdquo;
+services:
+web:
+image: web
+deploy:
+labels:
+com.example.description: &ldquo;This label will appear on the web service&rdquo;</p><p>通过将 deploy 外面的 labels 标签来设置容器上的 labels</p><p>version: &ldquo;3&rdquo;
+services:
+web:
+image: web
+labels:
+com.example.description: &ldquo;This label will appear on all containers for the web service&rdquo;</p><p>3.mode
+global:每个集节点只有一个容器
+replicated:指定容器数量（默认）
+version: &lsquo;3&rsquo;
+services:
+worker:
+image: dockersamples/examplevotingapp_worker
+deploy:
+mode: global</p><ol start=4><li>placement
+指定 constraints 和 preferences</li></ol><p>version: &lsquo;3&rsquo;
+services:
+db:
+image: postgres
+deploy:
+placement:
+constraints:</p><pre><code>      - node.role == manager
+      - engine.labels.operatingsystem == ubuntu 14.04
+            preferences:
+      - spread: node.labels.zone
+</code></pre><p>５.replicas
+如果服务是 replicated（默认)，需要指定运行的容器数量</p><p>version: &lsquo;3&rsquo;
+services:
+worker:
+image: dockersamples/examplevotingapp_worker
+networks:
+- frontend
+- backend
+deploy:
+mode: replicated
+replicas: 6</p><ol start=6><li>resources
+配置资源限制</li></ol><p>version: &lsquo;3&rsquo;
+services:
+redis:
+image: redis:alpine
+deploy:
+resources:
+limits:
+cpus: &lsquo;0.50&rsquo;
+memory: 50M
+reservations:
+cpus: &lsquo;0.25&rsquo;
+memory: 20M</p><p>此例子中，redis 服务限制使用不超过 50M 的内存和 0.50（50％）可用处理时间（CPU），并且 保留 20M 了内存和 0.25 CPU时间</p><ol start=7><li>restart_policy
+配置容器的重新启动，代替 restart</li></ol><p>condition:值可以为 none 、on-failure 以及 any(默认)
+delay: 尝试重启的等待时间，默认为 0
+max_attempts:在放弃之前尝试重新启动容器次数（默认：从不放弃）。如果重新启动在配置中没有成功 window，则此尝试不计入配置max_attempts 值。例如，如果 max_attempts 值为 2，并且第一次尝试重新启动失败，则可能会尝试重新启动两次以上。
+windows:在决定重新启动是否成功之前的等时间，指定为持续时间（默认值：立即决定）。
+version: &ldquo;3&rdquo;
+services:
+redis:
+image: redis:alpine
+deploy:
+restart_policy:
+condition: on-failure
+delay: 5s
+max_attempts: 3
+window: 120s</p><ol start=8><li>update_config
+配置更新服务，用于无缝更新应用（rolling update)</li></ol><p>parallelism：一次性更新的容器数量
+delay：更新一组容器之间的等待时间。
+failure_action：如果更新失败，可以执行的的是 continue、rollback 或 pause （默认）
+monitor：每次任务更新后监视失败的时间(ns|us|ms|s|m|h)（默认为0）
+max_failure_ratio：在更新期间能接受的失败率
+order：更新次序设置，top-first（旧的任务在开始新任务之前停止）、start-first（新的任务首先启动，并且正在运行的任务短暂重叠）（默认 stop-first）
+version: &lsquo;3.4&rsquo;
+services:
+vote:
+image: dockersamples/examplevotingapp_vote:before
+depends_on:</p><pre><code>  - redis
+    deploy:
+        replicas: 2
+        update_config:
+            parallelism: 2
+            delay: 10s
+            order: stop-first
+</code></pre><p>不支持 Docker stack desploy 的几个子选项
+build、cgroup_parent、container_name、devices、tmpfs、external_links、inks、network_mode、restart、security_opt、stop_signal、sysctls、userns_mode</p><ol start=16><li>devices
+设置映射列表，与 Docker 客户端的 &ndash;device 参数类似 :</li></ol><p>devices:</p><ul><li>&ldquo;/dev/ttyUSB0:/dev/ttyUSB0&rdquo;
+1
+2</li></ul><ol start=17><li>depends_on
+此选项解决了启动顺序的问题</li></ol><p>在使用 Compose 时，最大的好处就是少打启动命令，但是一般项目容器启动的顺序是有要求的，如果直接从上到下启动容器，必然会因为容器依赖问题而启动失败。例如在没启动数据库容器的时候启动了应用容器，这时候应用容器会因为找不到数据库而退出，为了避免这种情况我们需要加入一个标签，就是 depends_on，这个标签解决了容器的依赖、启动先后的问题。</p><p>指定服务之间的依赖关系，有两种效果</p><p>docker-compose up 以依赖顺序启动服务，下面例子中 redis 和 db 服务在 web 启动前启动
+docker-compose up SERVICE 自动包含 SERVICE 的依赖性，下面例子中，例如下面容器会先启动 redis 和 db
+两个服务，最后才启动 web 服务：
+version: &lsquo;3&rsquo;
+services:
+web:
+build: .
+depends_on:</p><pre><code>  - db
+  - redis
+redis:
+    image: redis
+db:
+    image: postgres
+</code></pre><p>注意的是，默认情况下使用 docker-compose up web 这样的方式启动 web 服务时，也会启动 redis 和 db 两个服务，因为在配置文件中定义了依赖关系</p><ol start=18><li>dns
+自定义 DNS 服务器，与 &ndash;dns 具有一样的用途，可以是单个值或列表</li></ol><p>dns: 8.8.8.8
+dns:</p><ul><li>8.8.8.8</li><li>9.9.9.9
+1
+2
+3
+4</li></ul><ol start=19><li>dns_search
+自定义 DNS 搜索域，可以是单个值或列表</li></ol><p>dns_search: example.com
+dns_search:</p><ul><li>dc1.example.com</li><li>dc2.example.com</li></ul><ol start=20><li>tmpfs
+挂载临时文件目录到容器内部，与 run 的参数一样效果，可以是单个值或列表</li></ol><p>tmpfs: /run
+tmpfs:</p><ul><li>/run</li><li>/tmp</li></ul><ol start=21><li>entrypoint
+在 Dockerfile 中有一个指令叫做 ENTRYPOINT 指令，用于指定接入点。在 docker-compose.yml 中可以定义接入点，覆盖 Dockerfile 中的定义：</li></ol><p>entrypoint: /code/entrypoint.sh
+1
+entrypoint 也可以是一个列表，方法类似于 dockerfile</p><p>entrypoint:
+- php
+- -d
+- zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
+- -d
+- memory_limit=-1
+- vendor/bin/phpunit</p><ol start=21><li>env_file
+从文件中添加环境变量。可以是单个值或是列表
+如果已经用 docker-compose -f FILE 指定了 Compose 文件，那么 env_file 路径值为相对于该文件所在的目录</li></ol><p>但 environment 环境中的设置的变量会会覆盖这些值，无论这些值未定义还是为 None</p><p>env_file: .env
+1
+或者根据 docker-compose.yml 设置多个：</p><p>env_file:</p><ul><li>./common.env</li><li>./apps/web.env</li><li>/opt/secrets.env</li></ul><p>环境配置文件 env_file 中的声明每行都是以 VAR=VAL 格式，其中以 # 开头的被解析为注释而被忽略</p><p>注意环境变量配置列表的顺序*,例如下面例子</p><p>docker_compose.yml</p><p>services:
+some-service:
+env_file:</p><pre><code>  - a.env
+  - b.env
+</code></pre><p>a.env 文件</p><p>a.env</p><p>VAR=1
+1
+2
+b.env文件</p><p>对于在文件a.env 中指定的相同变量但在文件 b.env 中分配了不同的值，如果 b.env 像下面列在 a.env 之后，则刚在 a.env 设置的值被 b.env 相同变量的值覆盖，此时 $VAR 值为 hello。此外，这里所说的环境变量是对宿主机的 Compose 而言的，如果在配置文件中有 build 操作，这些变量并不会进入构建过程中，如果要在构建中使用变量还是首选 arg 标签</p><ol start=22><li>environment
+添加环境变量，可以使用数组或字典。与上面的 env_file 选项完全不同，反而和 arg 有几分类似，这个标签的作用是设置镜像变量，它可以保存变量到镜像里面，也就是说启动的容器也会包含这些变量设置，这是与 arg 最大的不同。
+一般 arg 标签的变量仅用在构建过程中。而 environment 和 Dockerfile 中的 ENV 指令一样会把变量一直保存在镜像、容器中，类似 docker run -e 的效果</li></ol><p>environment:
+RACK_ENV: development
+SHOW: &rsquo;true'
+SESSION_SECRET:</p><p>或</p><p>environment:</p><ul><li>RACK_ENV=development</li><li>SHOW=true</li><li>SESSION_SECRET</li></ul><ol start=23><li>expose
+暴露端口，但不映射到宿主机，只被连接的服务访问。这个标签与 Dockerfile 中的 EXPOSE 指令一样，用于指定暴露的端口，但是只是作为一种参考，实际上 docker-compose.yml 的端口映射还得 ports 这样的标签</li></ol><p>expose:</p><ul><li>&ldquo;3000&rdquo;</li><li>&ldquo;8000&rdquo;
+1
+2
+3</li></ul><ol start=24><li>external_links
+链接到 docker-compose.yml 外部的容器，甚至 并非 Compose 项目文件管理的容器。参数格式跟 links 类似</li></ol><p>在使用Docker过程中，会有许多单独使用 docker run 启动的容器的情况，为了使 Compose 能够连接这些不在docker-compose.yml 配置文件中定义的容器，那么就需要一个特殊的标签，就是 external_links，它可以让Compose 项目里面的容器连接到那些项目配置外部的容器（前提是外部容器中必须至少有一个容器是连接到与项目内的服务的同一个网络里面）。</p><p>格式如下</p><p>external_links:</p><ul><li>redis_1</li><li>project_db_1:mysql</li><li>project_db_1:postgresql</li></ul><ol start=25><li>extra_hosts
+添加主机名的标签，就是往 /etc/hosts 文件中添加一些记录，与 Docker 客户端 中的 &ndash;add-host 类似：</li></ol><p>extra_hosts:</p><ul><li>&ldquo;somehost:162.242.195.82&rdquo;</li><li>&ldquo;otherhost:50.31.209.229&rdquo;</li></ul><p>具有 IP 地址和主机名的条目在 /etc/hosts 内部容器中创建。启动之后查看容器内部 hosts ，例如：</p><p>162.242.195.82 somehost
+50.31.209.229 otherhost
+1
+2
+26.healthcheck
+用于检查测试服务使用的容器是否正常</p><p>healthcheck:
+test: [&ldquo;CMD&rdquo;, &ldquo;curl&rdquo;, &ldquo;-f&rdquo;, &ldquo;http://localhost&rdquo;]
+interval: 1m30s
+timeout: 10s
+retries: 3
+start_period: 40s</p><p>interval，timeout 以及 start_period 都定为持续时间</p><p>test 必须是字符串或列表，如果它是一个列表，第一项必须是 NONE，CMD 或 CMD-SHELL ；如果它是一个字符串，则相当于指定CMD-SHELL 后跟该字符串。</p><p>Hit the local web app</p><p>test: [&ldquo;CMD&rdquo;, &ldquo;curl&rdquo;, &ldquo;-f&rdquo;, &ldquo;http://localhost&rdquo;]</p><p>As above, but wrapped in /bin/sh. Both forms below are equivalent.</p><p>test: [&ldquo;CMD-SHELL&rdquo;, &ldquo;curl -f http://localhost || exit 1&rdquo;]
+test: curl -f https://localhost || exit 1</p><p>如果需要禁用镜像的所有检查项目，可以使用 disable:true,相当于 test:[&ldquo;NONE&rdquo;]</p><p>healthcheck:
+disable: true</p><ol start=27><li>image
+从指定的镜像中启动容器，可以是存储仓库、标签以及镜像 ID</li></ol><p>image: redis
+image: ubuntu:14.04
+image: tutum/influxdb
+image: example-registry.com:4000/postgresql
+image: a4bc65fd</p><p>如果镜像不存在，Compose 会自动拉去镜像</p><ol start=28><li><p>isolation
+Linux 上仅仅支持 default 值</p></li><li><p>labels
+使用 Docker 标签将元数据添加到容器，可以使用数组或字典。与 Dockerfile 中的 LABELS 类似：</p></li></ol><p>labels:
+com.example.description: &ldquo;Accounting webapp&rdquo;
+com.example.department: &ldquo;Finance&rdquo;
+com.example.label-with-empty-value: ""</p><p>labels:</p><ul><li>&ldquo;com.example.description=Accounting webapp&rdquo;</li><li>&ldquo;com.example.department=Finance&rdquo;</li><li>&ldquo;com.example.label-with-empty-value&rdquo;</li></ul><p>30.links
+链接到其它服务的中的容器，可以指定服务名称也可以指定链接别名（SERVICE：ALIAS)，与 Docker 客户端的 &ndash;link 有一样效果，会连接到其它服务中的容器</p><p>web:
+links:</p><ul><li>db</li><li>db:database</li><li>redis</li></ul><p>使用的别名将会自动在服务容器中的 /etc/hosts 里创建。例如：</p><p>172.12.2.186 db
+172.12.2.186 database
+172.12.2.187 redis</p><p>相应的环境变量也将被创建</p><ol start=31><li>logging
+配置日志服务</li></ol><p>logging:
+driver: syslog
+options:
+syslog-address: &ldquo;tcp://192.168.0.42:123&rdquo;</p><p>该 driver值是指定服务器的日志记录驱动程序，默认值为 json-file,与 &ndash;log-diver 选项一样</p><p>driver: &ldquo;json-file&rdquo;
+driver: &ldquo;syslog&rdquo;
+driver: &ldquo;none&rdquo;</p><p>注意：只有驱动程序 json-file 和 journald 驱动程序可以直接从 docker-compose up 和 docker-compose logs 获取日志。使用任何其他方式不会显示任何日志。</p><p>对于可选值，可以使用 options 指定日志记录中的日志记录选项</p><p>driver: &ldquo;syslog&rdquo;
+options:
+syslog-address: &ldquo;tcp://192.168.0.42:123&rdquo;</p><p>默认驱动程序 json-file 具有限制存储日志量的选项，所以，使用键值对来获得最大存储大小以及最小存储数量</p><p>options:
+max-size: &ldquo;200k&rdquo;
+max-file: &ldquo;10&rdquo;</p><p>上面实例将存储日志文件，直到它们达到max-size:200kB，存储的单个日志文件的数量由该 max-file 值指定。随着日志增长超出最大限制，旧日志文件将被删除以存储新日志</p><p>docker-compose.yml 限制日志存储的示例</p><p>services:
+some-service:
+image: some-service
+logging:
+driver: &ldquo;json-file&rdquo;
+options:
+max-size: &ldquo;200k&rdquo;
+max-file: &ldquo;10&rdquo;</p><ol start=32><li>network_mode
+网络模式，用法类似于 Docke 客户端的 &ndash;net 选项，格式为：service:[service name]</li></ol><p>network_mode: &ldquo;bridge&rdquo;
+network_mode: &ldquo;host&rdquo;
+network_mode: &ldquo;none&rdquo;
+network_mode: &ldquo;service:[service name]&rdquo;
+network_mode: &ldquo;container:[container name/id]&rdquo;</p><p>可以指定使用服务或者容器的网络</p><ol start=33><li>networks
+加入指定网络</li></ol><p>services:
+some-service:
+networks:
+- some-network
+- other-network</p><ol start=34><li>aliases
+同一网络上的其他容器可以使用服务器名称或别名来连接到其他服务的容器</li></ol><p>services:
+some-service:
+networks:
+some-network:
+aliases:</p><pre><code>     - alias1
+     - alias3
+        other-network:
+            aliases:
+     - alias2
+</code></pre><p>下面实例中，提供 web 、worker以及db 服务，伴随着两个网络 new 和 legacy 。</p><p>version: &lsquo;2&rsquo;</p><p>services:
+web:
+build: ./web
+networks:
+- new</p><p>worker:
+build: ./worker
+networks:
+- legacy</p><p>db:
+image: mysql
+networks:
+new:
+aliases:
+- database
+legacy:
+aliases:
+- mysql</p><p>networks:
+new:
+legacy:</p><p>相同的服务可以在不同的网络有不同的别名</p><ol start=35><li>ipv4_address、ipv6_address
+为服务的容器指定一个静态 IP 地址</li></ol><p>version: &lsquo;2.1&rsquo;</p><p>services:
+app:
+image: busybox
+command: ifconfig
+networks:
+app_net:
+ipv4_address: 172.16.238.10
+ipv6_address: 2001:3984:3989::10</p><p>networks:
+app_net:
+driver: bridge
+enable_ipv6: true
+ipam:
+driver: default</p><table><thead><tr><th>config:</th></tr></thead><tbody><tr><td>subnet: 172.16.238.0/24</td></tr><tr><td>-</td></tr><tr><td>subnet: 2001:3984:3989::/64</td></tr></tbody></table><ol start=36><li><p>PID
+pid: &ldquo;host&rdquo;
+1
+将 PID 模式设置为主机 PID 模式，可以打开容器与主机操作系统之间的共享 PID 地址空间。使用此标志启动的容器可以访问和操作宿主机的其他容器，反之亦然。</p></li><li><p>ports
+映射端口</p></li><li><p>SHORT 语法
+可以使用 HOST:CONTAINER 的方式指定端口，也可以指定容器端口（选择临时主机端口），宿主机会随机映射端口</p></li></ol><p>ports:</p><ul><li>&ldquo;3000&rdquo;</li><li>&ldquo;3000-3005&rdquo;</li><li>&ldquo;8000:8000&rdquo;</li><li>&ldquo;9090-9091:8080-8081&rdquo;</li><li>&ldquo;49100:22&rdquo;</li><li>&ldquo;127.0.0.1:8001:8001&rdquo;</li><li>&ldquo;127.0.0.1:5000-5010:5000-5010&rdquo;</li><li>&ldquo;6060:6060/udp&rdquo;</li></ul><p>注意：当使用 HOST:CONTAINER 格式来映射端口时，如果使用的容器端口小于 60 可能会得到错误得结果，因为YAML 将会解析 xx:yy 这种数字格式为 60 进制，所以建议采用字符串格式。</p><ol start=2><li>LONG 语法
+LONG 语法支持 SHORT 语法不支持的附加字段</li></ol><p>target：容器内的端口
+published：公开的端口
+protocol： 端口协议（tcp 或 udp）
+mode：通过host 用在每个节点还是哪个发布的主机端口或使用 ingress 用于集群模式端口进行平衡负载，
+ports:</p><ul><li>target: 80
+published: 8080
+protocol: tcp
+mode: host</li></ul><ol start=38><li><p>secrets
+通过 secrets为每个服务授予相应的访问权限</p></li><li><p>SHORT 语法
+version: &ldquo;3.1&rdquo;
+services:
+redis:
+image: redis:latest
+deploy:
+replicas: 1
+secrets:</p><ul><li>my_secret</li><li>my_other_secret
+secrets:
+my_secret:
+file: ./my_secret.txt
+my_other_secret:
+external: true</li></ul></li></ol><p>2.. LONG 语法
+LONG 语法可以添加其他选项</p><p>source：secret 名称
+target：在服务任务容器中需要装载在 /run/secrets/ 中的文件名称，如果 source 未定义，那么默认为此值
+uid&gid：在服务的任务容器中拥有该文件的 UID 或 GID 。如果未指定，两者都默认为 0。
+mode：以八进制表示法将文件装载到服务的任务容器中 /run/secrets/ 的权限。例如，0444 代表可读。
+version: &ldquo;3.1&rdquo;
+services:
+redis:
+image: redis:latest
+deploy:
+replicas: 1
+secrets:
+- source: my_secret
+target: redis_secret
+uid: &lsquo;103&rsquo;
+gid: &lsquo;103&rsquo;
+mode: 0440
+secrets:
+my_secret:
+file: ./my_secret.txt
+my_other_secret:
+external: true</p><ol start=39><li>security_opt
+为每个容器覆盖默认的标签。简单说来就是管理全部服务的标签，比如设置全部服务的 user 标签值为 USER</li></ol><p>security_opt:</p><ul><li>label:user:USER</li><li>label:role:ROLE</li></ul><ol start=40><li>stop_grace_period
+在发送 SIGKILL 之前指定 stop_signal ，如果试图停止容器（如果它没有处理 SIGTERM（或指定的任何停止信号）），则需要等待的时间</li></ol><p>stop_grace_period: 1s
+stop_grace_period: 1m30s</p><p>默认情况下，stop 在发送SIGKILL之前等待10秒钟容器退出</p><ol start=41><li>stop_signal
+设置另一个信号来停止容器。在默认情况下使用的 SIGTERM 来停止容器。设置另一个信号可以使用 stop_signal 标签：</li></ol><p>stop_signal: SIGUSR1</p><ol start=42><li>sysctls
+在容器中设置的内核参数，可以为数组或字典</li></ol><p>sysctls:
+net.core.somaxconn: 1024
+net.ipv4.tcp_syncookies: 0</p><p>sysctls:</p><ul><li>net.core.somaxconn=1024</li><li>net.ipv4.tcp_syncookies=0</li></ul><ol start=43><li>ulimits
+覆盖容器的默认限制，可以单一地将限制值设为一个整数，也可以将soft/hard 限制指定为映射</li></ol><p>ulimits:
+nproc: 65535
+nofile:
+soft: 20000
+hard: 40000</p><ol start=44><li>userns_mode
+userns_mode: &ldquo;host&rdquo;
+1</li><li>volumes
+挂载一个目录或者一个已存在的数据卷容器，可以直接使用 HOST:CONTAINER 这样的格式，或者使用 HOST:CONTAINER:ro 这样的格式，后者对于容器来说，数据卷是只读的，这样可以有效保护宿主机的文件系统</li></ol><p>version: &ldquo;3.2&rdquo;
+services:
+web:
+image: nginx:alpine
+volumes:
+- type: volume
+source: mydata
+target: /data
+volume:
+nocopy: true
+- type: bind
+source: ./static
+target: /opt/app/static</p><p>db:
+image: postgres:latest
+volumes:
+- &ldquo;/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock&rdquo;
+- &ldquo;dbdata:/var/lib/postgresql/data&rdquo;</p><p>volumes:
+mydata:
+dbdata:</p><p>Compose 的数据卷指定路径可以是相对路径，使用 . 或者 .. 来指定相对目录。</p><p>数据卷的格式可以是下面多种形式：</p><p>volumes:</p><p>只是指定一个路径，Docker 会自动在创建一个数据卷（这个路径是容器内部的）。</p><ul><li>/var/lib/mysql</li></ul><p>使用绝对路径挂载数据卷</p><ul><li>/opt/data:/var/lib/mysql</li></ul><p>以 Compose 配置文件为中心的相对路径作为数据卷挂载到容器。</p><ul><li>./cache:/tmp/cache</li></ul><p>使用用户的相对路径（~/ 表示的目录是 /home/&lt;用户目录>/ 或者 /root/）。</p><ul><li>~/configs:/etc/configs/:ro</li></ul><p>已经存在的命名的数据卷。</p><ul><li>datavolume:/var/lib/mysql</li></ul><p>如果你不使用宿主机的路径，可以指定一个 volume_driver</p><p>volume_driver: mydriver
+1
+2</p><ol><li>SHORT 语法
+可以选择在主机（HOST:CONTAINER）或访问模式（HOST:CONTAINER:ro）上指定路径。</li></ol><p>可以在主机上挂载相对路径，该路径相对于正在使用的 Compose 配置文件的目录进行扩展。相对路径应始终以 . 或 .. 开头</p><p>volumes:</p><p>Just specify a path and let the Engine create a volume</p><ul><li>/var/lib/mysql</li></ul><p>Specify an absolute path mapping</p><ul><li>/opt/data:/var/lib/mysql</li></ul><p>Path on the host, relative to the Compose file</p><ul><li>./cache:/tmp/cache</li></ul><p>User-relative path</p><ul><li>~/configs:/etc/configs/:ro</li></ul><p>Named volume</p><ul><li>datavolume:/var/lib/mysql</li></ul><ol start=2><li>LONG 语法
+LONG 语法有些附加字段</li></ol><p>type：安装类型，可以为 volume、bind 或 tmpfs
+source：安装源，主机上用于绑定安装的路径或定义在顶级 volumes密钥中卷的名称 ,不适用于 tmpfs 类型安装。
+target：卷安装在容器中的路径
+read_only：标志将卷设置为只读
+bind：配置额外的绑定选项
+propagation：用于绑定的传播模式
+volume：配置额外的音量选项
+nocopy：创建卷时禁止从容器复制数据的标志
+tmpfs：配置额外的 tmpfs 选项
+size：tmpfs 的大小，以字节为单位
+version: &ldquo;3.2&rdquo;
+services:
+web:
+image: nginx:alpine
+ports:
+- &ldquo;80:80&rdquo;
+volumes:
+- type: volume
+source: mydata
+target: /data
+volume:
+nocopy: true
+- type: bind
+source: ./static
+target: /opt/app/static</p><p>networks:
+webnet:</p><p>volumes:
+mydata:</p><ol start=46><li>volumes_from
+从其它容器或者服务挂载数据卷，可选的参数是 :ro 或 :rw，前者表示容器只读，后者表示容器对数据卷是可读可写的（默认情况为可读可写的）。</li></ol><p>volumes_from:</p><ul><li>service_name</li><li>service_name:ro</li><li>container:container_name</li><li>container:container_name:rw</li></ul><ol start=47><li>用于服务、群集以及堆栈文件的卷
+在使用服务，群集和 docker-stack.yml 文件时，请记住支持服务的任务（容器）可以部署在群集中的任何节点上，并且每次更新服务时都可能是不同的节点。</li></ol><p>在缺少指定源的命名卷的情况下，Docker 为支持服务的每个任务创建一个匿名卷。关联的容器被移除后，匿名卷不会保留。</p><p>如果希望数据持久存在，请使用可识别多主机的命名卷和卷驱动程序，以便可以从任何节点访问数据。或者，对该服务设置约束，以便将其任务部署在具有该卷的节点上。</p><p>下面一个例子，Docker Labs 中 votingapp 示例的 docker-stack.yml文件中定义了一个称为 db 的服务。它被配置为一个命名卷来保存群体上的数据， 并且仅限于在节点上运行。下面是来自该文件的部分内容：db postgres manager</p><p>version: &ldquo;3&rdquo;
+services:
+db:
+image: postgres:9.4
+volumes:
+- db-data:/var/lib/postgresql/data
+networks:
+- backend
+deploy:
+placement:
+constraints: [node.role == manager]</p><ol start=48><li>restart
+默认值为 no ，即在任何情况下都不会重新启动容器；当值为 always 时，容器总是重新启动；当值为 on-failure 时，当出现 on-failure 报错容器退出时，容器重新启动。</li></ol><p>restart: &ldquo;no&rdquo;
+restart: always
+restart: on-failure
+restart: unless-stopped</p><ol start=49><li><h4 id=其他选项>其他选项
+<a class=anchor href=#%e5%85%b6%e4%bb%96%e9%80%89%e9%a1%b9>#</a></h4></li></ol><p>关于标签：cpu_shares、cpu_quota、 cpuse、domainname、hostname、 ipc、 mac_address、privileged、 read_only、 shm_size、stdin_open、tty、 user、 working_dir</p><p>上面这些都是一个单值的标签，类似于使用 docker run 的效果</p><p>cpu_shares: 73
+cpu_quota: 50000
+cpuset: 0,1</p><p>user: postgresql
+working_dir: /code</p><p>domainname: foo.com
+hostname: foo
+ipc: host
+mac_address: 02:42:ac:11:65:43</p><p>privileged: true</p><p>read_only: true
+shm_size: 64M
+stdin_open: true
+tty: true</p><ol start=50><li>持续时间</li></ol><p>某些配置选项如 check 的子选项interval以及timeout 的设置格式</p><p>2.5s
+10s
+1m30s
+2h32m
+5h34m56s</p><p>支持的单位有 us、ms、s、m 以及 h</p><ol start=51><li><h4 id=指定字节值>指定字节值
+<a class=anchor href=#%e6%8c%87%e5%ae%9a%e5%ad%97%e8%8a%82%e5%80%bc>#</a></h4></li></ol><p>某些选项如 bulid 的子选项 shm_size</p><p>2b
+1024kb
+2048k
+300m
+1gb</p><p>支持的单位是 b，k，m 以及 g，或 kb， mb 和 gb。目前不支持十进制值</p><ol start=52><li><h4 id=extends>extends
+<a class=anchor href=#extends>#</a></h4></li></ol><p>这个标签可以扩展另一个服务，扩展内容可以是来自在当前文件，也可以是来自其他文件，相同服务的情况下，后来者会有选择地覆盖原有配置</p><p>extends:
+file: common.yml
+service: webapp</p><p>用户可以在任何地方使用这个标签，只要标签内容包含 file 和 service 两个值就可以了。file 的值可以是相对或者绝对路径，如果不指定 file 的值，那么 Compose 会读取当前 YML 文件的信息。</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(n){const e=window.getSelection(),t=document.createRange();t.selectNodeContents(n),e.removeAllRanges(),e.addRange(t)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#一-前言>一. 前言</a></li><li><a href=#配置选项>配置选项</a></li></ul></li></ul></nav></div></aside></main></body></html>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>15-集成开发 on 工具书-mlzhang</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/</link><description>Recent content in 15-集成开发 on 工具书-mlzhang</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 30 Apr 2022 16:55:47 +0000</lastBuildDate><atom:link href="http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml"/><item><title>01-git_flow工作流使用指南</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/01-git_flow%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/01-git_flow%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>Git Flow使用方法 # git flow是一个git的扩展集。Git flow 可以工作在 OSX, Linux 和 Windows之下。 本文主要列举一些常用的git flow命令。以及git flow从无到有的步骤；
+安装。 初始化。 git flow init 最后就一路回车选择默认的就ok了，，接下来就是使用了 常用命令以及分支：
+分支介绍：
+master。 只有一个，并且不会在master上进行代码的操作。 develop。 只有一个，新特性的开发是基于develop开发的，但是不能直接在develop上进行开发，而是在基于develop上创建feature分支进行新特性的开发。 feature。 可以同时存在多个，基于develop分支被创建。对于每一个新的功能可以创建一个新的feature分支，开发结束之后，合并到develop分支即可。 创建一个新的feature分支，命令：git flow feature start name 执行之后，feature/name分支就会被创建。 当新特性开发完成过后，需要合并到develop上，命令:git flow feature finish name 执行之后，feature/name分支的内容就会合并到develop，，并且删除feature/name分支。 release分支。 release分支是为了发布而存在的分支，基于develop分支被创建。在同一时间只能有一个release分支，在此分支上仅仅是较少代码的修复。否则，容易引起release分支不稳定。当release分支被创建之后，develop分支可能在准备另一个版本的，因此，当release分支merge回develop分支时候可能会出现冲突，需要手工解决冲突。 创建一个release分支，命令：git flow release start v.1.0 当完成release分支功能之后，执行命令：git flow release finish v.1.0。这个命令会执行一下的操作：（1.分支merge回master分支；2.使用release分支名称打tag；3.release分支merge回develop分支；4.删除release分支。） hotfix分支。 当发现master分支出现一个需要紧急修复的bug，这个时候就需要使用hotfix。基于master分支被创建。同一时间只有一个hotfix分支，生命周期比较短。 创建hotfix分支。命令：git flow hotfix start v.</description></item><item><title>02-jenkins配置指南01</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/02-jenkins%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%9701/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/02-jenkins%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%9701/</guid><description>一、Windows环境中安装Jenkins # 在最简单的情况下，Jenkins 只需要两个步骤：
+1、下载最新的版本（一个 WAR 文件）。Jenkins官方网址: http://Jenkins-ci.org/
+2、命运行运行 java -jar jenkins.war　（默认情况下端口是8080，如果要使用其他端口启动，可以通过命令行”java –jar Jenkins.war &amp;ndash;httpPort=80”的方式修改）
+注意：Jenkins 需要运行 Java 5以及以上的版本。
+还有一种安装方式就是将下载的war包文件部署到 servlet 容器，然后启动容器，在浏览器的URL地址栏中输入类似http://localhost:8080/jenkins/这样的地址即可。下图是安装成功后的界面（使用的是Linux+Tomcat6+Java6环境）：
+二、Jenkins配置 # 在配置前的一些话：Jenkins的配置不可能全部都说到的，大部分配置是有英文说明的，点击输入框后面的问号就可以看见了。英文不会用翻译工具，多测试几次，你就懂了。
+2.1 系统管理 # 在已运行的Jenkins主页中，点击左侧的系统管理进入如下界面：
+2.1.1 提示信息 # Ps：版本不同提示的消息有可能不同
+2.1.1.1 Utf-8编码 # Your container doesn&amp;rsquo;t use UTF-8 to decode URLs. If you use non-ASCII characters as a job name etc, this will cause problems. See Containers and Tomcat i18n for more details.</description></item><item><title>03-jenkins配置指南02</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/03-jenkins%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%9702/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/03-jenkins%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%9702/</guid><description>操作环境：Windows
+一、环境准备
+1 安装JDK
+本文采用jdk-8u111-windows-x64.exe；
+2 配置tomcat
+本文采用tomcat8，无需安装，配置JAVA_HOME及JRE_HOME环境变量即可；
+3 安装maven
+本文采用maven3.3.9，无需安装；
+4 安装Jenkins
+下载地址https://jenkins.io/download/，仅下载war包，如下图：
+将下载好的jenkins.war放进tomcat/webapps目录下。
+二、相关配置
+1 登入http://localhost:8080/jenkins，进入Jenkins初始化页面，第一次启动时间可能有点长，耐心等待。进入成功后会看到如下画面，按提示路径打开密码文件，输入密码：
+解锁后又是一长段时间等待，此后可能出现如下图所示界面：
+表示无法下载Jenkins插件，可能是因为防火墙导致，而Jenkins插件的安装非常重要，建议翻墙。如无法翻墙，则选择Skip Plugin Installations跳过插件安装。进入以下页面，设置登陆用户：
+2 设置成功后即进入Jenkins主界面：
+点击左上侧系统管理，进入Jenkins基本系统设置(主要是以下三块):
+3 先进入“管理插件”模块安装必需的插件，以下是建议安装列表：
+将本文附件中的插件放入Jenkins插件存放目录即可，如本文插件存放目录为：C:\Users\Administrator.jenkins\plugins（可点击系统管理–&amp;gt;系统设置,在最上方查看，如下图）；
+4 配置系统设置
+添加编码全局属性：
+增加系统管理员邮件地址：
+其他的可用默认配置，保存后退出。
+5 添加全局配置Global ToolConfiguration
+配置JDK，不采用自动安装：
+配置maven，不采用自动安装：
+以上即为需要设置的系统配置。
+三、系统部署
+系统设置完成后开始添加任务，任务类型选择自由风格：
+创建完成后可在主页看到如下画面：
+在”All” tab下能看到新建的任务，点击该任务，进入该任务的配置页面：
+设置项目备注及构建规则：
+配置项目轮询的源码位置(@HEAD表示构建最新的代码)并配置代码访问密码：
+配置构建触发器，如下图配置为每天晚上9：30开始构建（Cron表达式）：
+增加Invoke top-level Maven targets构建步骤，插件目标为编译、发现编译Bug、部署，另外还可以配置构建时忽略测试用例：
+增加构建后操作步骤：Publish FindBugs analysis results，用于查看FindBugs插件的代码分析报告，该模块可采用默认配置：
+增加构建后操作步骤：Deploy war/ear to a container，用于将构建后生成的war包部署至tomcat服务器，下图中Contextpath用于配置项目访问路径，如填/RMS_Server则表示项目的根访问目录为：http://localhost:8080/RMS_Server，Deploy on failure用于配置当前构建失败时是否仍然部署至tomcat，默认不选：
+以上即为本项目的所有配置，完成后应用（或保存）并退出。
+配置完成后即可开始构建，左侧可查看bugs分析信息及构建历史：
+点击某个构建记录，如上图中的#31，即可查看构建日志、SVN代码提交日志及bugs分析结果：
+四、编码问题
+FindBugs分析报告中查看某些代码文件时可能出现中文乱码情况，如下图：
+这是tomcat的编码问题导致的，可在系统管理中查看tomcat的相关编码情况：
+主要关注的是file.encoding属性及sun.jnu.encoding属性，二者需要设置为UTF-8以兼容中文：
+这可通过在tomcat配置文件/bin/catalina.bat文件中添加set “JAVA_OPTS=-Dfile.</description></item><item><title>04-pep8</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/04-pep8/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/04-pep8/</guid><description/></item><item><title>05-Pycharm代码风格集成设置</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/05-pycharm%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90%E8%AE%BE%E7%BD%AE/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/05-pycharm%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90%E8%AE%BE%E7%BD%AE/</guid><description>设置代码分风格为 Google
+设置默认的测试模式</description></item><item><title>06-Pycharm集成检查工具</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/06-pycharm%E9%9B%86%E6%88%90%E6%A3%80%E6%9F%A5%E5%B7%A5%E5%85%B7/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/06-pycharm%E9%9B%86%E6%88%90%E6%A3%80%E6%9F%A5%E5%B7%A5%E5%85%B7/</guid><description>pylint
+Program: C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\Scripts\pylint.exe Arguments: -rn --msg-template=&amp;#34;{abspath}:{line}: [{msg_id}({symbol}), {obj}] {msg}&amp;#34; $FilePath$ Working directory: $FileDir$ Output filters: flake8
+Program: $PyInterpreterDirectory$/python C:\Users\zhang\AppData\Local\Programs\Python\Python36\Scripts\flake8.exe Arguments: -m flake8 --show-source --statistics $ProjectFileDir$ Working directory: $ProjectFileDir$ Output filters: autopep8
+Program: C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\Scripts\autopep8.exe Arguments: --in-place --aggressive --aggressive $FilePath$ Working directory: $ProjectFileDir$ Output filters: $FILE_PATH$\:$LINE$\:$COLUMN$\:.*</description></item><item><title>07-pyline</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/07-pyline/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/07-pyline/</guid><description/></item><item><title>08-tox集成使用指南</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/08-tox%E9%9B%86%E6%88%90%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/08-tox%E9%9B%86%E6%88%90%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>以keystone工程为例，其他工程类似
+内容包括：打源码包（sdist）、单元测试（UT）、测试覆盖率（coverage）、代码格式检查（pep8，flake）
+pip install tox 可以将tox安装在外部全局环境中，方便每次使用tox命令，而不用激活虚拟环境，tox会在当前工程的文件目录下创建.tox文件目录来下载需要的虚拟环境和存放生成的文件
+1、引子 # 接触了一段时间openstack社区，并提交了几个bug之后，就发现社区中，从bug提交、问题确认、到bug修复，代码review，自动构建、单元测试、静态检查、再到代码合入，也就是我们经常说的持续集成（CI），是一个非常简单和高效的过程。
+开发人员都是懒人，这点我从来都没有怀疑过，怎么让一群懒人（还是一大群）将CI的这么多步骤做规范，并且不觉得是一个麻烦的过程，需要很高的技巧和聪明才智。
+我认为持续集成（CI）有两个重点需要把握，首先要好上手，简单易学，开发都是懒人，不好用的东西，很难养成习惯使用；其次做且仅做应该做的事，也就是CI检查的范围要确定，保持CI的高速，写完代码10分钟之内，要出ut和coverage的结果。
+来让我们看看openstack社区的持续集成都包括哪些内容，使用了哪些工具。
+2、tox具体使用方法 # 对openstack几个核心工程代码比较熟悉的朋友，可能都会注意到代码根目录下都有个tox.ini文件，tox其实就是openstack持续集成中非常重要的一个工具，tox.ini就是tox的配置文件。
+tox的官方对于tox的定义是这样的：
+Tox as is a generic virtualenv management and test command line tool
+http://tox.readthedocs.org/en/latest/
+也就是一个通用的虚拟环境管理和测试命令行工具。
+所谓的虚拟环境，就是可以在一个主机上，自定义出多套的python环境，多套环境中使用不同的python拦截器，环境变量设置，第三方依赖包，执行不同的测试命令，最重要的是各个环境之间互不影响，相互隔离。
+最典型的应用就测试在不同python版本下代码的兼容性，我们可以为py2.4，py2.5，py2.6，py2.7创建不同的虚拟环境，都可以用tox统一管理；也可以在tox.ini中自定义虚拟环境，例如：testevn:pep8，代码格式检查；testenv:cover，测试覆盖率。
+我们以最新的H版的keystone的tox.ini为例：
+首先定义tox的全局配置，列出了需要执行的虚拟环境列表，在命令行中直接执行tox，就会依次执行py26，py27，pep8
+[tox] envlist = py26,py27,pep8 然后定义了虚拟环境的配置
+setenv列出了虚拟机环境中生效的环境变量，一些配色方案和单元测试标志；
+deps列出了虚拟环境需要的第三方依赖包，也就是keystone根目录下的requirements.txt和test-requirements.txt其中包括了keystone运行和单元测试时，需要用到的依赖包，每个虚拟环境创建的时候，会通过pip install -r requirements.txt和pip install -r test-requirements.txt安装依赖包到虚拟环境；
+commands就是在当前虚拟环境中需要执行的命令，python tools/patch_tox_venv.py就是安装了redhat-eventlet.patch补丁；nosetests {posargs}就是执行nose进行单元测试，{posargs}参数就是可以将tox的参数传递给nosetests，例如：tox &amp;ndash; &amp;ndash;with-coverage执行的时候就是nosetests &amp;ndash;with-coverage
+[testenv] setenv = VIRTUAL_ENV={envdir} NOSE_WITH_OPENSTACK=1 NOSE_OPENSTACK_COLOR=1 NOSE_OPENSTACK_RED=0.05 NOSE_OPENSTACK_YELLOW=0.025 NOSE_OPENSTACK_SHOW_ELAPSED=1 NOSE_OPENSTACK_STDOUT=1 deps = -r{toxinidir}/requirements.</description></item><item><title>09-unittest</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/09-unittest/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/09-unittest/</guid><description/></item><item><title>10-git_rebase</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/10-git_rebase/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/10-git_rebase/</guid><description>https://www.jianshu.com/p/4a8f4af4e803
+pick：保留该commit（缩写:p） reword：保留该commit，但我需要修改该commit的注释（缩写:r） edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e） squash：将该commit和前一个commit合并（缩写:s） fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f） exec：执行shell命令（缩写:x） drop：我要丢弃该commit（缩写:d） s: 提供可编辑界面，编辑commit
+f: 自动融合，放弃当前的commit内容
+r: 需要继续　git rebase &amp;ndash;continue 进行编辑commit
+e: 需要继续执行命令　git commit &amp;ndash;admend 修改commit
+d: 删除commit ,慎用！
+p: 保留commit
+x: 执行cmd shell 命令</description></item><item><title>celery的使用</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/celery%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/celery%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>celery的使用
+https://blog.csdn.net/Shyllin/article/details/80940643
+https://www.cnblogs.com/forward-wang/p/5970806.html
+启动命令
+celery -A task_dir_name beat
+http://127.0.0.1:5555/user/celery/?v1=aaaa&amp;amp;v2=bbb 可使用 AWS 的 SQS 和 DynmoDB
+windows
+pip install eventlet celery -A &amp;lt;mymodule&amp;gt; worker -l info -P eventlet http://www.cnblogs.com/cwp-bg/p/8759638.html
+celery_aaa
+celery -A celery_aaa worker --loglevel=info python3 -m celery_aaa.run_tasks 可视化 celery 和 rabbitmq
+pip install flower 所有的任务会存在本地的 schedule文件中
+当没有发布任务时 worker 会等待，直到有任务发布
+当没有worker存在时，会一直发布任务，直到worker出现
+启动任务发布时会返回它的pid，可以通过kill pid 来停止
+celery_aaa
+# 运行worker celery -A celery_aaa worker --loglevel=info # 导入任务 from celery_util.celery_aaa.tasks import longtime_add longtime_add.</description></item><item><title>Docker使用</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/docker%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/docker%E4%BD%BF%E7%94%A8/</guid><description>Docker使用
+安装
+https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
+命令
+https://www.jianshu.com/p/ef8f17442d8f</description></item><item><title>memcached的安装和启动</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/memcached%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%90%AF%E5%8A%A8/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/memcached%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%90%AF%E5%8A%A8/</guid><description>README
+windows创建服务 # schtasks /create /sc onstart /tn memcached /tr &amp;#34;&amp;#39;D:\softWare\memcached-amd64\memcached.exe&amp;#39; -m 512 -p 10000 &amp;#34; 删除服务
+schtasks /delete /tn memcached windows启动服务
+memcached -u root -l 0.0.0.0 -p 10001 -c 1024 -P D:\softWare\memcached-amd64\Pid\memcached.pid 启动memcached # memcached -d -m 10 -u root -l 0.0.0.0 -p 12000 -c 256 -P /tmp/memcached.pid 参数说明: -d 是启动一个守护进程 -m 是分配给Memcache使用的内存数量，单位是MB -u 是运行Memcache的用户 -l 是监听的服务器IP地址 -p 是设置Memcache监听的端口,最好是1024以上的端口 -c 选项是最大运行的并发连接数，默认是1024，按照你服务器的负载量来设定 -P 是设置保存Memcache的pid文件 常用命令</description></item><item><title>rabbitmq使用</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/rabbitmq%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/rabbitmq%E4%BD%BF%E7%94%A8/</guid><description>参考链接
+https://tests4geeks.com/python-celery-rabbitmq-tutorial/
+# 安装 sudo apt-get install rabbitmq-server # 设置用户和权限 # add user &amp;#39;jimmy&amp;#39; with password &amp;#39;jimmy123&amp;#39; $ rabbitmqctl add_user jimmy jimmy123 # add virtual host &amp;#39;jimmy_vhost&amp;#39; $ rabbitmqctl add_vhost jimmy_vhost # add user tag &amp;#39;jimmy_tag&amp;#39; for user &amp;#39;jimmy&amp;#39; $ rabbitmqctl set_user_tags jimmy jimmy_tag # set permission for user &amp;#39;jimmy&amp;#39; on virtual host &amp;#39;jimmy_vhost&amp;#39; $ rabbitmqctl set_permissions -p jimmy_vhost jimmy &amp;#34;.*&amp;#34; &amp;#34;.*&amp;#34; &amp;#34;.*&amp;#34;</description></item><item><title>scrapyd使用方法</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/scrapyd%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/scrapyd%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid><description>scrapyd使用方法
+发布爬虫任务
+scrapyd-deploy 001 -p lianjiaSpider
+打包egg文件
+scrapyd-deploy --build-egg lianjia.egg
+1 启动
+scrapyd
+2 发布工程到scrapyd
+scrapyd-deploy &amp;lt;target&amp;gt; -p &amp;lt;project&amp;gt;
+scrapyd-deploy scrapyd1 -p Crawler 3 验证是否发布成功
+scrapyd-deploy -L &amp;lt;target&amp;gt;
+scrapyd-deploy -L scrapyd1
+也可以 scrapyd-deploy -l
+4 启动爬虫
+curl http://192.168.2.333:6800/schedule.json -d project=Crawler -d spider=CommonSpider 5 终止爬虫
+curl http://192.168.2.333:6800/cancel.json -d project=Crawler -d job8270364f9d9811e5adbf000c29a5d5be 参考链接 使用scrapyd
+https://www.jianshu.com/p/f0077adb74bb</description></item><item><title>spiderKeeper接口</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/spiderkeeper%E6%8E%A5%E5%8F%A3/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/spiderkeeper%E6%8E%A5%E5%8F%A3/</guid><description>创建项目
+create project url: /project/create method: post form 上传egg文件
+deploy submit upload egg url: /project/1/spider/upload method: post form 删除项目
+manage delete project url: /project/1/delete method: get 创建定时任务
+Periodic Jobs add job 创建定时任务 url: /project/1/job/add/ method: post form 运行一次
+run once create url : /project/1/job/add method: post form 停止任务
+/project/1/jobexecs/3/stop 查看日志
+log url: /project/1/jobexecs/1/log method: get 和scrapyd通讯文件
+app =&amp;gt; proxy =&amp;gt; contrib =&amp;gt; scrapy.</description></item><item><title>命令</title><link>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/%E5%91%BD%E4%BB%A4/</link><pubDate>Sat, 30 Apr 2022 16:55:47 +0000</pubDate><guid>http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/%E5%91%BD%E4%BB%A4/</guid><description/></item></channel></rss>
