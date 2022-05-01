@@ -1,7 +1,8 @@
 ---
 weight: 1000
 bookFlatSection: true
-title: "Example Site"
+title: "示例"
+draft: true
 ---
 
 # Introduction
