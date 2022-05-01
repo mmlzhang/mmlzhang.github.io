@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 200
+weight: 9980
 title: "01-python基础"
 ---

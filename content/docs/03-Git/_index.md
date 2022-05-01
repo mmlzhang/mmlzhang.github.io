@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 400
+weight: 9960
 title: "03-Git"
 ---
