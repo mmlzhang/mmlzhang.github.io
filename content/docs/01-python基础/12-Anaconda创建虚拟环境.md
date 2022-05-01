@@ -31,7 +31,7 @@ conda create -n your_env_name python=X.X(版本)  创建指定Python版本的虚
 
 **激活**    activate  your_env_name
 
-![1538054523168](assets/1538054523168.png)
+![1538054523168](/assets/1538054523168.png)
 
 #### 对指定虚拟环境安装扩展包
 

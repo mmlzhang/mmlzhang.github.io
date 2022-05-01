@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 600
+weight: 500
 title: "04-数据库"
 ---

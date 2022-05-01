@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 1300
+weight: 1200
 title: "11-Python设计模式"
 ---

@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 400
+weight: 300
 title: "02-前端HTML-js-css"
 ---

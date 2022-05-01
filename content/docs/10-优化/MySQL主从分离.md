@@ -53,7 +53,7 @@ start salve;
 show slave status\G; # 查看状态
 ```
 
-![1533709204033](assets/1533709204033.png)
+![1533709204033](/assets/1533709204033.png)
 
 
 
