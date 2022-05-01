@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 9940
+weight: 9930
 title: "05-Linux"
 ---

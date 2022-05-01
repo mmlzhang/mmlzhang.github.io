@@ -43,4 +43,3 @@ cp -R themes/hugo-book/exampleSite/content .
 ```
 hugo server -D
 ```
-

@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 9930
+weight: 9920
 title: "06-Django"
 ---

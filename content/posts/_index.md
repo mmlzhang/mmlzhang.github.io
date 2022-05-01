@@ -1,7 +1,9 @@
 ---
+weight: 100
 menu:
   after:
     name: blog
-    weight: 5
-title: Blog
+    weight: 10
+title: 博客预览
+
 ---

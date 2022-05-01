@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 9920
+weight: 9910
 title: "07-Flask"
 ---
