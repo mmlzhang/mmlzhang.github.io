@@ -1,7 +1,9 @@
 ---
 title: 08-tox使用
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 08-tox使用
+- mlzhang
+description : "08-tox使用"
 ---
 tox
 

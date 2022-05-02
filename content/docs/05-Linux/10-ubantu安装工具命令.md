@@ -1,7 +1,9 @@
 ---
 title: 10-ubantu安装工具命令
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 10-ubantu安装工具命令
+- mlzhang
+description : "10-ubantu安装工具命令"
 ---
 将vim设置为默认文本编辑器
 

@@ -1,7 +1,9 @@
 ---
 title: 00-Python设计模式介绍
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 00-Python设计模式介绍
+- mlzhang
+description : "00-Python设计模式介绍"
 ---
 ### 简介
 

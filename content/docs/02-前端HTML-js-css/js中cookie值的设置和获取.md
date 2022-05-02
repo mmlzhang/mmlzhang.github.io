@@ -1,7 +1,9 @@
 ---
 title: js中cookie值的设置和获取
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- js中cookie值的设置和获取
+- mlzhang
+description : "js中cookie值的设置和获取"
 ---
 ## JS cookie的取值和设置值
 

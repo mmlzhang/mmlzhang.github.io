@@ -1,7 +1,9 @@
 ---
 title: shell脚本语言
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- shell脚本语言
+- mlzhang
+description : "shell脚本语言"
 ---
 **shell脚本编辑**
 

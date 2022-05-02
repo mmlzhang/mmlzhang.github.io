@@ -1,7 +1,9 @@
 ---
 title: 02-jenkins配置指南01
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 02-jenkins配置指南01
+- mlzhang
+description : "02-jenkins配置指南01"
 ---
 ## 一、Windows环境中安装Jenkins
 

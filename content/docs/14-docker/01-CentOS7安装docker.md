@@ -1,7 +1,9 @@
 ---
 title: 01-CentOS7安装docker
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 01-CentOS7安装docker
+- mlzhang
+description : "01-CentOS7安装docker"
 ---
 ### CentOS 7 安装docker
 

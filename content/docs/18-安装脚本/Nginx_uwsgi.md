@@ -1,7 +1,9 @@
 ---
 title: Nginx_uwsgi
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- Nginx_uwsgi
+- mlzhang
+description : "Nginx_uwsgi"
 ---
 ### Nginx+uwsgi安装配置
 

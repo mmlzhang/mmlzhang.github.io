@@ -1,7 +1,9 @@
 ---
 title: 06-Python操作数据库
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 06-Python操作数据库
+- mlzhang
+description : "06-Python操作数据库"
 ---
 ORM - Object Relation Mapping 对象关系映射
 

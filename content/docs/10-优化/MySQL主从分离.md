@@ -1,7 +1,9 @@
 ---
 title: MySQL主从分离
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- MySQL主从分离
+- mlzhang
+description : "MySQL主从分离"
 ---
 MySQL主从分离，读写分离
 

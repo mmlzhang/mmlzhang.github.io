@@ -1,7 +1,9 @@
 ---
 title: 05-gitattributes设置文件属性
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 05-gitattributes设置文件属性
+- mlzhang
+description : "05-gitattributes设置文件属性"
 ---
 ### Git的gitattributes文件详解
 

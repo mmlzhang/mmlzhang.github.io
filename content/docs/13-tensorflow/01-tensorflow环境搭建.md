@@ -1,7 +1,9 @@
 ---
 title: 01-tensorflow环境搭建
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 01-tensorflow环境搭建
+- mlzhang
+description : "01-tensorflow环境搭建"
 ---
 ## 01-tensorflow环境搭建
 

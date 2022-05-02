@@ -1,7 +1,9 @@
 ---
 title: MySQL优化
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- MySQL优化
+- mlzhang
+description : "MySQL优化"
 ---
 ### MySQL优化
 

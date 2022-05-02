@@ -1,7 +1,9 @@
 ---
 title: 04-Git别名alias
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 04-Git别名alias
+- mlzhang
+description : "04-Git别名alias"
 ---
 #### 给Git设置alias别名
 

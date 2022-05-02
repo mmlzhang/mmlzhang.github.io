@@ -1,7 +1,9 @@
 ---
 title: emacs配置
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- emacs配置
+- mlzhang
+description : "emacs配置"
 ---
 evil 为emacs绑定vim键
 

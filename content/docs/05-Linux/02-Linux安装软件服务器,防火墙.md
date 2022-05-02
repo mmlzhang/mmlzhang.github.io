@@ -1,7 +1,9 @@
 ---
 title: 02-Linux安装软件服务器,防火墙
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 02-Linux安装软件服务器,防火墙
+- mlzhang
+description : "02-Linux安装软件服务器,防火墙"
 ---
 在Linux系统下使用 npm yum rpm  nginx Linux防火墙 firewall  去IOE运动
 

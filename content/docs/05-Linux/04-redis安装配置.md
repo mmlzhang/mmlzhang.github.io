@@ -1,7 +1,9 @@
 ---
 title: 04-redis安装配置
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 04-redis安装配置
+- mlzhang
+description : "04-redis安装配置"
 ---
 非关系型数据库,redias安装,配置redias
 

@@ -1,7 +1,9 @@
 ---
 title: 07-Linux命令cat-find
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 07-Linux命令cat-find
+- mlzhang
+description : "07-Linux命令cat-find"
 ---
 常用命令   cat find
 

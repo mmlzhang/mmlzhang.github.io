@@ -1,7 +1,9 @@
 ---
 title: rabbitmq使用
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- rabbitmq使用
+- mlzhang
+description : "rabbitmq使用"
 ---
 参考链接
 

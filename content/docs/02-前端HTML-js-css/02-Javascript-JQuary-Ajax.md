@@ -1,7 +1,9 @@
 ---
 title: 02-Javascript-JQuary-Ajax
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 02-Javascript-JQuary-Ajax
+- mlzhang
+description : "02-Javascript-JQuary-Ajax"
 ---
 浏览器对象模型-BOM(Browser Object Model)
 

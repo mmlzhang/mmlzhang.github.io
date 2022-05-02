@@ -1,7 +1,9 @@
 ---
 title: 安装python3
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 安装python3
+- mlzhang
+description : "安装python3"
 ---
 ### 安装python3.6
 

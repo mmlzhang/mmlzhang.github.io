@@ -1,7 +1,9 @@
 ---
 title: 01-Linux操作,阿里云主机
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 01-Linux操作,阿里云主机
+- mlzhang
+description : "01-Linux操作,阿里云主机"
 ---
 ## Linux命令和操作方法
 

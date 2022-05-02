@@ -1,7 +1,9 @@
 ---
 title: celery的使用
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- celery的使用
+- mlzhang
+description : "celery的使用"
 ---
 celery的使用
 

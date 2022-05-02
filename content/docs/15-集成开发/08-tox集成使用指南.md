@@ -1,7 +1,9 @@
 ---
 title: 08-tox集成使用指南
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 08-tox集成使用指南
+- mlzhang
+description : "08-tox集成使用指南"
 ---
 以keystone工程为例，其他工程类似
 

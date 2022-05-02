@@ -1,7 +1,9 @@
 ---
 title: 09-alias编辑系统命令
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 09-alias编辑系统命令
+- mlzhang
+description : "09-alias编辑系统命令"
 ---
 ```shell
 

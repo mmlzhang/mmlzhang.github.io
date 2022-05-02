@@ -1,7 +1,9 @@
 ---
 title: 03-vim文本编辑器
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 03-vim文本编辑器
+- mlzhang
+description : "03-vim文本编辑器"
 ---
 **vim 文本编辑器** 基本操作笔记
 

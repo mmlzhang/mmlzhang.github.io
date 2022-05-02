@@ -1,7 +1,9 @@
 ---
 title: 12-Anaconda创建虚拟环境
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 12-Anaconda创建虚拟环境
+- mlzhang
+description : "12-Anaconda创建虚拟环境"
 ---
 ### 下载安装 
 https://www.jianshu.com/p/920a6e18cfd6 (参考文档)

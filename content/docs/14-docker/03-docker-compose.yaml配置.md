@@ -1,7 +1,9 @@
 ---
 title: 03-docker-compose
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 03-docker-compose
+- mlzhang
+description : "03-docker-compose"
 ---
 docker compose 在 Docker 容器运用中具有很大的学习意义，docker compose 是一个整合发布应用的利器。而使用 docker compose 时，懂得如何编排 docker compose 配置文件是很重要的。
 

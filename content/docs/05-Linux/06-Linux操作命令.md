@@ -1,7 +1,9 @@
 ---
 title: 06-Linux操作命令
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 06-Linux操作命令
+- mlzhang
+description : "06-Linux操作命令"
 ---
 ## Linux常用命令
 

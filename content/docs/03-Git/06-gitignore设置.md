@@ -1,7 +1,9 @@
 ---
 title: 06-gitignore设置
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 06-gitignore设置
+- mlzhang
+description : "06-gitignore设置"
 ---
 ## Git的gitignore文件设置
 

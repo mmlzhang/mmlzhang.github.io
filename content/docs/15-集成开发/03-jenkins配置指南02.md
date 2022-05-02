@@ -1,7 +1,9 @@
 ---
 title: 03-jenkins配置指南02
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 03-jenkins配置指南02
+- mlzhang
+description : "03-jenkins配置指南02"
 ---
 操作环境：Windows
 

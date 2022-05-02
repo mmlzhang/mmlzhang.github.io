@@ -1,7 +1,9 @@
 ---
 title: 08-MVC模式
-date: 2022-04-30 16:55:47
-tags: my-notes
+keywords:
+- 08-MVC模式
+- mlzhang
+description : "08-MVC模式"
 ---
 ### MVC模式
 
