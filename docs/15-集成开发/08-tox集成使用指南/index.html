@@ -1,45 +1,5 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="以keystone工程为例，其他工程类似
-内容包括：打源码包（sdist）、单元测试（UT）、测试覆盖率（coverage）、代码格式检查（pep8，flake）
-pip install tox 可以将tox安装在外部全局环境中，方便每次使用tox命令，而不用激活虚拟环境，tox会在当前工程的文件目录下创建.tox文件目录来下载需要的虚拟环境和存放生成的文件
-1、引子 #  接触了一段时间openstack社区，并提交了几个bug之后，就发现社区中，从bug提交、问题确认、到bug修复，代码review，自动构建、单元测试、静态检查、再到代码合入，也就是我们经常说的持续集成（CI），是一个非常简单和高效的过程。
-开发人员都是懒人，这点我从来都没有怀疑过，怎么让一群懒人（还是一大群）将CI的这么多步骤做规范，并且不觉得是一个麻烦的过程，需要很高的技巧和聪明才智。
-我认为持续集成（CI）有两个重点需要把握，首先要好上手，简单易学，开发都是懒人，不好用的东西，很难养成习惯使用；其次做且仅做应该做的事，也就是CI检查的范围要确定，保持CI的高速，写完代码10分钟之内，要出ut和coverage的结果。
-来让我们看看openstack社区的持续集成都包括哪些内容，使用了哪些工具。
-2、tox具体使用方法 #  对openstack几个核心工程代码比较熟悉的朋友，可能都会注意到代码根目录下都有个tox.ini文件，tox其实就是openstack持续集成中非常重要的一个工具，tox.ini就是tox的配置文件。
-tox的官方对于tox的定义是这样的：
-Tox as is a generic virtualenv management and test command line tool
-http://tox.readthedocs.org/en/latest/
-也就是一个通用的虚拟环境管理和测试命令行工具。
-所谓的虚拟环境，就是可以在一个主机上，自定义出多套的python环境，多套环境中使用不同的python拦截器，环境变量设置，第三方依赖包，执行不同的测试命令，最重要的是各个环境之间互不影响，相互隔离。
-最典型的应用就测试在不同python版本下代码的兼容性，我们可以为py2.4，py2.5，py2.6，py2.7创建不同的虚拟环境，都可以用tox统一管理；也可以在tox.ini中自定义虚拟环境，例如：testevn:pep8，代码格式检查；testenv:cover，测试覆盖率。
-我们以最新的H版的keystone的tox.ini为例：
-首先定义tox的全局配置，列出了需要执行的虚拟环境列表，在命令行中直接执行tox，就会依次执行py26，py27，pep8
-[tox] envlist = py26,py27,pep8 然后定义了虚拟环境的配置
-setenv列出了虚拟机环境中生效的环境变量，一些配色方案和单元测试标志；
-deps列出了虚拟环境需要的第三方依赖包，也就是keystone根目录下的requirements.txt和test-requirements.txt其中包括了keystone运行和单元测试时，需要用到的依赖包，每个虚拟环境创建的时候，会通过pip install -r requirements.txt和pip install -r test-requirements.txt安装依赖包到虚拟环境；
-commands就是在当前虚拟环境中需要执行的命令，python tools/patch_tox_venv.py就是安装了redhat-eventlet.patch补丁；nosetests {posargs}就是执行nose进行单元测试，{posargs}参数就是可以将tox的参数传递给nosetests，例如：tox &ndash; &ndash;with-coverage执行的时候就是nosetests &ndash;with-coverage
-[testenv] setenv = VIRTUAL_ENV={envdir}  NOSE_WITH_OPENSTACK=1  NOSE_OPENSTACK_COLOR=1  NOSE_OPENSTACK_RED=0.05  NOSE_OPENSTACK_YELLOW=0.025  NOSE_OPENSTACK_SHOW_ELAPSED=1  NOSE_OPENSTACK_STDOUT=1 deps = -r{toxinidir}/requirements."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="08-tox集成使用指南"><meta property="og:description" content="以keystone工程为例，其他工程类似
-内容包括：打源码包（sdist）、单元测试（UT）、测试覆盖率（coverage）、代码格式检查（pep8，flake）
-pip install tox 可以将tox安装在外部全局环境中，方便每次使用tox命令，而不用激活虚拟环境，tox会在当前工程的文件目录下创建.tox文件目录来下载需要的虚拟环境和存放生成的文件
-1、引子 #  接触了一段时间openstack社区，并提交了几个bug之后，就发现社区中，从bug提交、问题确认、到bug修复，代码review，自动构建、单元测试、静态检查、再到代码合入，也就是我们经常说的持续集成（CI），是一个非常简单和高效的过程。
-开发人员都是懒人，这点我从来都没有怀疑过，怎么让一群懒人（还是一大群）将CI的这么多步骤做规范，并且不觉得是一个麻烦的过程，需要很高的技巧和聪明才智。
-我认为持续集成（CI）有两个重点需要把握，首先要好上手，简单易学，开发都是懒人，不好用的东西，很难养成习惯使用；其次做且仅做应该做的事，也就是CI检查的范围要确定，保持CI的高速，写完代码10分钟之内，要出ut和coverage的结果。
-来让我们看看openstack社区的持续集成都包括哪些内容，使用了哪些工具。
-2、tox具体使用方法 #  对openstack几个核心工程代码比较熟悉的朋友，可能都会注意到代码根目录下都有个tox.ini文件，tox其实就是openstack持续集成中非常重要的一个工具，tox.ini就是tox的配置文件。
-tox的官方对于tox的定义是这样的：
-Tox as is a generic virtualenv management and test command line tool
-http://tox.readthedocs.org/en/latest/
-也就是一个通用的虚拟环境管理和测试命令行工具。
-所谓的虚拟环境，就是可以在一个主机上，自定义出多套的python环境，多套环境中使用不同的python拦截器，环境变量设置，第三方依赖包，执行不同的测试命令，最重要的是各个环境之间互不影响，相互隔离。
-最典型的应用就测试在不同python版本下代码的兼容性，我们可以为py2.4，py2.5，py2.6，py2.7创建不同的虚拟环境，都可以用tox统一管理；也可以在tox.ini中自定义虚拟环境，例如：testevn:pep8，代码格式检查；testenv:cover，测试覆盖率。
-我们以最新的H版的keystone的tox.ini为例：
-首先定义tox的全局配置，列出了需要执行的虚拟环境列表，在命令行中直接执行tox，就会依次执行py26，py27，pep8
-[tox] envlist = py26,py27,pep8 然后定义了虚拟环境的配置
-setenv列出了虚拟机环境中生效的环境变量，一些配色方案和单元测试标志；
-deps列出了虚拟环境需要的第三方依赖包，也就是keystone根目录下的requirements.txt和test-requirements.txt其中包括了keystone运行和单元测试时，需要用到的依赖包，每个虚拟环境创建的时候，会通过pip install -r requirements.txt和pip install -r test-requirements.txt安装依赖包到虚拟环境；
-commands就是在当前虚拟环境中需要执行的命令，python tools/patch_tox_venv.py就是安装了redhat-eventlet.patch补丁；nosetests {posargs}就是执行nose进行单元测试，{posargs}参数就是可以将tox的参数传递给nosetests，例如：tox &ndash; &ndash;with-coverage执行的时候就是nosetests &ndash;with-coverage
-[testenv] setenv = VIRTUAL_ENV={envdir}  NOSE_WITH_OPENSTACK=1  NOSE_OPENSTACK_COLOR=1  NOSE_OPENSTACK_RED=0.05  NOSE_OPENSTACK_YELLOW=0.025  NOSE_OPENSTACK_SHOW_ELAPSED=1  NOSE_OPENSTACK_STDOUT=1 deps = -r{toxinidir}/requirements."><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/08-tox%E9%9B%86%E6%88%90%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2022-04-30T16:55:47+00:00"><meta property="article:modified_time" content="2022-04-30T16:55:47+00:00"><title>08-tox集成使用指南 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
-<script defer src=/en.search.min.e19e6e7d06c383e93fafe5e2111b95b9f5f777782cfa1695d8e500b80c435ad0.js integrity="sha256-4Z5ufQbDg+k/r+XiERuVufX3d3gs+haV2OUAuAxDWtA=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="08-tox集成使用指南"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="08-tox集成使用指南"><meta property="og:description" content="08-tox集成使用指南"><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/15-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/08-tox%E9%9B%86%E6%88%90%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"><meta property="article:section" content="docs"><title>08-tox集成使用指南 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.073ab86199df510bd7c61f49187626a08c17a03effacf6e0b987a59e384daa7f.js integrity="sha256-Bzq4YZnfUQvXxh9JGHYmoIwXoD7/rPbguYelnjhNqn8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>工具书-mlzhang</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><input type=checkbox id=section-0bf3c2a49f26dabca6952b870248d3b7 class=toggle>
 <label for=section-0bf3c2a49f26dabca6952b870248d3b7 class="flex justify-between"><a role=button>21-vue学习</a></label><ul></ul></li><li><input type=checkbox id=section-777fdc97635e6502949855bc095ee6aa class=toggle>
 <label for=section-777fdc97635e6502949855bc095ee6aa class="flex justify-between"><a role=button>20-airflow实战</a></label><ul></ul></li><li><input type=checkbox id=section-5155dad3123cddc005a7f9ed86d6db12 class=toggle>

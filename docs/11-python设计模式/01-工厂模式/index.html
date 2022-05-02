@@ -1,23 +1,5 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="01-工厂模式
-介绍 #  在工厂模式中，客户端可以请求一个对象，而无需知道这个对象来自哪里，也就是，使用那个类来生成这个对象，共仓背后的思想是简化对象的创建，与客户端自己基于类实例化直接创建对象相比，基于一个中心化函数来实现，更易于追踪创建了那些对象，通过将创建对象的代码和使用对象的代码解耦，工厂能够降低应用维护的复杂度。
-工厂通常由两种方式，一种是工厂方法，它是一个方法，对不同的输入参数返回不同的对象，第二种是抽象工厂，它是一组用于创建一系列相关事务的工厂方法
-1. 工厂方法 #  案例：Django框架工厂方法来创建表单字段，Django的forms模块支持不同类型的字段（CharField, EmailField）的创建和定制（max_length, required）。
-何时使用 #  如果因为应用创建对象的代码分布在多个不同的地方，而不是仅在一个函数/方法中，你发现没法跟踪这些对象，那么因该考虑使用工厂方法模式
-代码示例 https://github.com/lanms/Python_design_pattern/blob/master/01_factory_pattern/factory_method.py
-2. 抽象工厂 #  抽象工厂设计模式是抽象方法的一种泛化
-抽象工厂有一个有点，在使用工厂方法时从用户的视角通常是看不到的，那么就是抽象工厂能够通过改变激活的工厂方法动态的改变应用行为。
-何时使用 #  通常一开始使用的是工厂方法，因为它更加简单，如果后来发现应用需要许多工厂方法，那么将创建一系列对象的过程合并在一起，而最终引入抽象方法。
-代码示例https://github.com/lanms/Python_design_pattern/blob/master/01_factory_pattern/abstract_factory.py"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="01-工厂模式"><meta property="og:description" content="01-工厂模式
-介绍 #  在工厂模式中，客户端可以请求一个对象，而无需知道这个对象来自哪里，也就是，使用那个类来生成这个对象，共仓背后的思想是简化对象的创建，与客户端自己基于类实例化直接创建对象相比，基于一个中心化函数来实现，更易于追踪创建了那些对象，通过将创建对象的代码和使用对象的代码解耦，工厂能够降低应用维护的复杂度。
-工厂通常由两种方式，一种是工厂方法，它是一个方法，对不同的输入参数返回不同的对象，第二种是抽象工厂，它是一组用于创建一系列相关事务的工厂方法
-1. 工厂方法 #  案例：Django框架工厂方法来创建表单字段，Django的forms模块支持不同类型的字段（CharField, EmailField）的创建和定制（max_length, required）。
-何时使用 #  如果因为应用创建对象的代码分布在多个不同的地方，而不是仅在一个函数/方法中，你发现没法跟踪这些对象，那么因该考虑使用工厂方法模式
-代码示例 https://github.com/lanms/Python_design_pattern/blob/master/01_factory_pattern/factory_method.py
-2. 抽象工厂 #  抽象工厂设计模式是抽象方法的一种泛化
-抽象工厂有一个有点，在使用工厂方法时从用户的视角通常是看不到的，那么就是抽象工厂能够通过改变激活的工厂方法动态的改变应用行为。
-何时使用 #  通常一开始使用的是工厂方法，因为它更加简单，如果后来发现应用需要许多工厂方法，那么将创建一系列对象的过程合并在一起，而最终引入抽象方法。
-代码示例https://github.com/lanms/Python_design_pattern/blob/master/01_factory_pattern/abstract_factory.py"><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/01-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2022-04-30T16:55:47+00:00"><meta property="article:modified_time" content="2022-04-30T16:55:47+00:00"><title>01-工厂模式 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
-<script defer src=/en.search.min.e19e6e7d06c383e93fafe5e2111b95b9f5f777782cfa1695d8e500b80c435ad0.js integrity="sha256-4Z5ufQbDg+k/r+XiERuVufX3d3gs+haV2OUAuAxDWtA=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="01-工厂模式"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="01-工厂模式"><meta property="og:description" content="01-工厂模式"><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/11-python%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/01-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"><meta property="article:section" content="docs"><title>01-工厂模式 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.073ab86199df510bd7c61f49187626a08c17a03effacf6e0b987a59e384daa7f.js integrity="sha256-Bzq4YZnfUQvXxh9JGHYmoIwXoD7/rPbguYelnjhNqn8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>工具书-mlzhang</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><input type=checkbox id=section-0bf3c2a49f26dabca6952b870248d3b7 class=toggle>
 <label for=section-0bf3c2a49f26dabca6952b870248d3b7 class="flex justify-between"><a role=button>21-vue学习</a></label><ul></ul></li><li><input type=checkbox id=section-777fdc97635e6502949855bc095ee6aa class=toggle>
 <label for=section-777fdc97635e6502949855bc095ee6aa class="flex justify-between"><a role=button>20-airflow实战</a></label><ul></ul></li><li><input type=checkbox id=section-5155dad3123cddc005a7f9ed86d6db12 class=toggle>

@@ -1,33 +1,5 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="http://www.berlinix.com/it/gitflow.php
-http://www.berlinix.com/it/gitflow.php
-http://www.berlinix.com/it/git.php
-http://www.berlinix.com/it/git.php
-gitflow分支管理模型 #  gitflow的分支类型：
- master分支（1个） develop分支（1个） feature分支。同时存在多个。 release分支。同一时间只有1个，生命周期很短，只是为了发布。 hotfix分支。同一时间只有1个。生命周期较短，用了修复bug或小粒度修改发布。  在这个模型中，master和develop都具有象征意义。master分支上的代码总是稳定的（stable build），随时可以发布出去。develop上的代码总是从feature上合并过来的，可以进行Nightly Builds，但不直接在develop上进行开发。当develop上的feature足够多以至于可以进行新版本的发布时，可以创建release分支。
-release分支基于develop，进行很简单的修改后就被合并到master，并打上tag，表示可以发布了。紧接着release将被合并到develop；此时develop可能往前跑了一段，出现合并冲突，需要手工解决冲突后再次合并。这步完成后就删除release分支。
-当从已发布版本中发现bug要修复时，就应用到hotfix分支了。hotfix基于master分支，完成bug修复或紧急修改后，要merge回master，打上一个新的tag，并merge回develop，删除hotfix分支。
-由此可见release和hotfix的生命周期都较短，master/develop虽然总是存在但却不常使用。
-以上就是gitflow的基本概念了。下面是nvie（gitflow的提出者，一个荷兰人！） A successful Git branching model（发布于2010年月5日）一文的笔记。
-从右看起：
- 时间轴。 feature（玫红）。主要是自己玩了，差不多的时候要合并回develop去。从不与master交互。 develop（黄色）。主要是和feature以及release交互。 release（绿色）。总是基于develop，最后又合并回develop。当然对应的tag跑到master这边去了。 hotfix（红色）。总是基于master，并最后合并到master和develop。 master（蓝色）。没有什么东西，仅是一些关联的tag，因从不在master上开发。  接下来nvie说道自己喜爱git，因git改变了人们对合并/分支（merge/branches）的看法。从集中式的代码管理工具过来的人感到释放了（beware of merge conflicts, they bite you，注意合并冲突，它们会跳出来咬你！）。
-gitflow实例 #  安装gitflow：
-$ git clone --recursive git://github.com/nvie/gitflow.git $ cd gitflow/ $ sudo make install $ ls /usr/local/bin/git-flow /usr/local/bin/git-flow 到项目根目录下执行gitflow，因为之前修改没有commit，所以gitflow初始化失败：
-$ git flow init fatal: Working tree contains unstaged changes."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="07-Git_Flow使用方法"><meta property="og:description" content="http://www.berlinix.com/it/gitflow.php
-http://www.berlinix.com/it/gitflow.php
-http://www.berlinix.com/it/git.php
-http://www.berlinix.com/it/git.php
-gitflow分支管理模型 #  gitflow的分支类型：
- master分支（1个） develop分支（1个） feature分支。同时存在多个。 release分支。同一时间只有1个，生命周期很短，只是为了发布。 hotfix分支。同一时间只有1个。生命周期较短，用了修复bug或小粒度修改发布。  在这个模型中，master和develop都具有象征意义。master分支上的代码总是稳定的（stable build），随时可以发布出去。develop上的代码总是从feature上合并过来的，可以进行Nightly Builds，但不直接在develop上进行开发。当develop上的feature足够多以至于可以进行新版本的发布时，可以创建release分支。
-release分支基于develop，进行很简单的修改后就被合并到master，并打上tag，表示可以发布了。紧接着release将被合并到develop；此时develop可能往前跑了一段，出现合并冲突，需要手工解决冲突后再次合并。这步完成后就删除release分支。
-当从已发布版本中发现bug要修复时，就应用到hotfix分支了。hotfix基于master分支，完成bug修复或紧急修改后，要merge回master，打上一个新的tag，并merge回develop，删除hotfix分支。
-由此可见release和hotfix的生命周期都较短，master/develop虽然总是存在但却不常使用。
-以上就是gitflow的基本概念了。下面是nvie（gitflow的提出者，一个荷兰人！） A successful Git branching model（发布于2010年月5日）一文的笔记。
-从右看起：
- 时间轴。 feature（玫红）。主要是自己玩了，差不多的时候要合并回develop去。从不与master交互。 develop（黄色）。主要是和feature以及release交互。 release（绿色）。总是基于develop，最后又合并回develop。当然对应的tag跑到master这边去了。 hotfix（红色）。总是基于master，并最后合并到master和develop。 master（蓝色）。没有什么东西，仅是一些关联的tag，因从不在master上开发。  接下来nvie说道自己喜爱git，因git改变了人们对合并/分支（merge/branches）的看法。从集中式的代码管理工具过来的人感到释放了（beware of merge conflicts, they bite you，注意合并冲突，它们会跳出来咬你！）。
-gitflow实例 #  安装gitflow：
-$ git clone --recursive git://github.com/nvie/gitflow.git $ cd gitflow/ $ sudo make install $ ls /usr/local/bin/git-flow /usr/local/bin/git-flow 到项目根目录下执行gitflow，因为之前修改没有commit，所以gitflow初始化失败：
-$ git flow init fatal: Working tree contains unstaged changes."><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/03-git/07-git_flow%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2022-04-30T16:55:47+00:00"><meta property="article:modified_time" content="2022-04-30T16:55:47+00:00"><title>07-Git_Flow使用方法 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
-<script defer src=/en.search.min.e19e6e7d06c383e93fafe5e2111b95b9f5f777782cfa1695d8e500b80c435ad0.js integrity="sha256-4Z5ufQbDg+k/r+XiERuVufX3d3gs+haV2OUAuAxDWtA=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="07-Git_Flow使用方法"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="07-Git_Flow使用方法"><meta property="og:description" content="07-Git_Flow使用方法"><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/03-git/07-git_flow%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><meta property="article:section" content="docs"><title>07-Git_Flow使用方法 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.073ab86199df510bd7c61f49187626a08c17a03effacf6e0b987a59e384daa7f.js integrity="sha256-Bzq4YZnfUQvXxh9JGHYmoIwXoD7/rPbguYelnjhNqn8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>工具书-mlzhang</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><input type=checkbox id=section-0bf3c2a49f26dabca6952b870248d3b7 class=toggle>
 <label for=section-0bf3c2a49f26dabca6952b870248d3b7 class="flex justify-between"><a role=button>21-vue学习</a></label><ul></ul></li><li><input type=checkbox id=section-777fdc97635e6502949855bc095ee6aa class=toggle>
 <label for=section-777fdc97635e6502949855bc095ee6aa class="flex justify-between"><a role=button>20-airflow实战</a></label><ul></ul></li><li><input type=checkbox id=section-5155dad3123cddc005a7f9ed86d6db12 class=toggle>

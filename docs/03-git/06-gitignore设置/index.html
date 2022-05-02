@@ -1,29 +1,5 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Git的gitignore文件设置 #  [TOC]
-在使用Git的过程中，我们喜欢有的文件比如日志，临时文件，编译的中间文件等不要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。
-Git 忽略文件提交的方法 #  有三种方法可以实现忽略Git中不想提交的文件。
-在Git项目中定义 .gitignore 文件 #  这种方式通过在项目的某个文件夹下定义 .gitignore 文件，在该文件中定义相应的忽略规则，来管理当前文件夹下的文件的Git提交行为。
-.gitignore 文件是可以提交到公有仓库中，这就为该项目下的所有开发者都共享一套定义好的忽略规则。
-在 .gitingore 文件中，遵循相应的语法，在每一行指定一个忽略规则。如：
-*.log *.temp /vendor 在Git项目的设置中指定排除文件 #  这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写入其中。
-需要注意的是，这种方式指定的忽略文件的根目录是项目根目录。
-定义Git全局的 .gitignore 文件 #  除了可以在项目中定义 .gitignore 文件外，还可以设置全局的 git .gitignore 文件来管理所有Git项目的行为。这种方式在不同的项目开发者之间是不共享的，是属于项目之上Git应用级别的行为。
-这种方式也需要创建相应的 .gitignore 文件，可以放在任意位置。然后在使用以下命令配置Git：
-git config --global core.excludesfile ~/.gitignore Git 忽略规则 #  详细的忽略规则可以参考官方英文文档
-Git 忽略规则优先级 #  在 .gitingore 文件中，每一行指定一个忽略规则，Git 检查忽略规则的时候有多个来源，它的优先级如下（由高到低）：
- 从命令行中读取可用的忽略规则 当前目录定义的规则 父级目录定义的规则，依次递推 $GIT_DIR/info/exclude 文件中定义的规则 core."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="06-gitignore设置"><meta property="og:description" content="Git的gitignore文件设置 #  [TOC]
-在使用Git的过程中，我们喜欢有的文件比如日志，临时文件，编译的中间文件等不要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。
-Git 忽略文件提交的方法 #  有三种方法可以实现忽略Git中不想提交的文件。
-在Git项目中定义 .gitignore 文件 #  这种方式通过在项目的某个文件夹下定义 .gitignore 文件，在该文件中定义相应的忽略规则，来管理当前文件夹下的文件的Git提交行为。
-.gitignore 文件是可以提交到公有仓库中，这就为该项目下的所有开发者都共享一套定义好的忽略规则。
-在 .gitingore 文件中，遵循相应的语法，在每一行指定一个忽略规则。如：
-*.log *.temp /vendor 在Git项目的设置中指定排除文件 #  这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写入其中。
-需要注意的是，这种方式指定的忽略文件的根目录是项目根目录。
-定义Git全局的 .gitignore 文件 #  除了可以在项目中定义 .gitignore 文件外，还可以设置全局的 git .gitignore 文件来管理所有Git项目的行为。这种方式在不同的项目开发者之间是不共享的，是属于项目之上Git应用级别的行为。
-这种方式也需要创建相应的 .gitignore 文件，可以放在任意位置。然后在使用以下命令配置Git：
-git config --global core.excludesfile ~/.gitignore Git 忽略规则 #  详细的忽略规则可以参考官方英文文档
-Git 忽略规则优先级 #  在 .gitingore 文件中，每一行指定一个忽略规则，Git 检查忽略规则的时候有多个来源，它的优先级如下（由高到低）：
- 从命令行中读取可用的忽略规则 当前目录定义的规则 父级目录定义的规则，依次递推 $GIT_DIR/info/exclude 文件中定义的规则 core."><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/03-git/06-gitignore%E8%AE%BE%E7%BD%AE/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2022-04-30T16:55:47+00:00"><meta property="article:modified_time" content="2022-04-30T16:55:47+00:00"><title>06-gitignore设置 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
-<script defer src=/en.search.min.e19e6e7d06c383e93fafe5e2111b95b9f5f777782cfa1695d8e500b80c435ad0.js integrity="sha256-4Z5ufQbDg+k/r+XiERuVufX3d3gs+haV2OUAuAxDWtA=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="06-gitignore设置"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="06-gitignore设置"><meta property="og:description" content="06-gitignore设置"><meta property="og:type" content="article"><meta property="og:url" content="http://lanms.github.io/docs/03-git/06-gitignore%E8%AE%BE%E7%BD%AE/"><meta property="article:section" content="docs"><title>06-gitignore设置 | 工具书-mlzhang</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css integrity="sha256-gsXb0jRHzuC0wqo+0Izglh+qQOH6Nw7uT4yfAuDUa18=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.073ab86199df510bd7c61f49187626a08c17a03effacf6e0b987a59e384daa7f.js integrity="sha256-Bzq4YZnfUQvXxh9JGHYmoIwXoD7/rPbguYelnjhNqn8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>工具书-mlzhang</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><input type=checkbox id=section-0bf3c2a49f26dabca6952b870248d3b7 class=toggle>
 <label for=section-0bf3c2a49f26dabca6952b870248d3b7 class="flex justify-between"><a role=button>21-vue学习</a></label><ul></ul></li><li><input type=checkbox id=section-777fdc97635e6502949855bc095ee6aa class=toggle>
 <label for=section-777fdc97635e6502949855bc095ee6aa class="flex justify-between"><a role=button>20-airflow实战</a></label><ul></ul></li><li><input type=checkbox id=section-5155dad3123cddc005a7f9ed86d6db12 class=toggle>
