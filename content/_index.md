@@ -44,6 +44,21 @@ _Aleksandr Pushkin_
     That which passes will be dear.
 
 
-## 其他
+## 个人简介
 
-勇气通往天堂，怯懦通往地狱。——**塞内加**
+还没有更新到这里。。。
+
+## 打赏
+
+**_天生我材必有用，千金散尽还复来_。**
+
+
+{{< tabs "uniqueid" >}}
+{{< tab "打赏 —>" >}} 
+## 感谢支持
+您的支持是我更新的动力！
+
+{{< /tab >}}
+{{< tab "微信打赏" >}} ![wechat_pay](/wechat_pay.png#index_pay) {{< /tab >}}
+{{< tab "支付宝打赏" >}} ![zhifubao_pay](/zhifubao_pay.png#index_pay) {{< /tab >}}
+{{< /tabs >}}
