@@ -1,6 +1,6 @@
 {
-  "name": "工具书-mlzhang",
-  "short_name": "工具书-mlzhang",
+  "name": "wiki-mlzhang",
+  "short_name": "wiki-mlzhang",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
