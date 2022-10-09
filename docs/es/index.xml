@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>es on wiki-mlzhang</title><link>http://mmzhang.github.io/docs/es/</link><description>Recent content in es on wiki-mlzhang</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://mmzhang.github.io/docs/es/index.xml" rel="self" type="application/rss+xml"/><item><title>配置</title><link>http://mmzhang.github.io/docs/es/%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://mmzhang.github.io/docs/es/%E9%85%8D%E7%BD%AE/</guid><description>只有设置 node.master: true 的节点在原master宕机后才有竞选master节点的权限
+设置node.master: true 时，生产环境不要设置node.data: true, 同时存储数据和索引会造成性能损耗
+master宕机后
+选举新的master 新master数据分片写入权限转移, Replica转移 重启宕机的master 同步丢失数据到原master</description></item></channel></rss>
