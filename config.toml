@@ -1,6 +1,6 @@
-baseURL = 'http://lanms.github.io/'
+baseURL = 'http://mmzhang.github.io/'
 languageCode = 'en-us'
-title = '工具书-mlzhang'
+title = 'wiki-mlzhang'
 
 
 [module]
