@@ -1,6 +1,6 @@
 baseURL = 'http://mmzhang.github.io/'
 languageCode = 'en-us'
-title = 'wiki-mlzhang'
+title = 'wiki'
 
 
 [module]
